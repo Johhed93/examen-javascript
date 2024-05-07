@@ -1,0 +1,51 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    background: #212121;
+    font-family: "Yanone Kaffeesatz", sans-serif;
+}
+header{
+    padding: 40px 0;
+}
+nav {
+    display: flex;
+    width: 85%;
+    margin-inline: auto;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo{
+    display: flex;
+    align-items: center;
+    font-family: "Kalam", cursive;
+    font-size: 1.5rem;
+    color: #A072FF;
+    gap: 5px;
+    text-decoration: none;
+}
+.logo-icon{
+    font-size: 2.3rem;
+}
+.navigation-list{
+    display: flex;
+    gap: 30px;
+    list-style-type: none;
+}
+.navigation-link{
+    width: 150px;
+    height: 50px;
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
+    background: #A072FF;
+    font-size: 1.1rem;
+    text-decoration: none;
+    color: white;
+}
+.register{
+    background: #7473FF;
+}
