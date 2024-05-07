@@ -34,6 +34,8 @@ const showHousesButton = (house)=>{
     const button= document.createElement("button");
     button.value=house;
     button.innerHTML=house;
+    button.classList.add("house-btn")
+    button.classList.add(`${house}`)
     
     hogwartsHouses.appendChild(button)
 
