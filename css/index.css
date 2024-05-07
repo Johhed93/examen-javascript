@@ -70,6 +70,7 @@ h1 {
     border-radius: 10px;
     color: white;
     width: 200px;
+    font-size: 1.1rem;
 }
 .search-container{
     display: flex;
@@ -88,8 +89,9 @@ h1 {
     display: flex;
     align-items: center;
     flex-direction: column;
-    gap: 5px;
+    gap: 10px;
     color: white;
+    
 }
 .input {
     padding: 10px ;
@@ -97,6 +99,7 @@ h1 {
     outline: none;
     border: none;
     background: rgb(255, 255, 255, 0.7);
+    width: 214px;
 }
 .button-container {
     display: flex;
@@ -110,6 +113,7 @@ h1 {
     outline: none;
     position: relative;
     font-size: 1.1rem;
+    color: beige;
     
 }
 .house-btn::before{
@@ -120,6 +124,8 @@ h1 {
     top: 0;
     position: absolute;
     border-radius: 10px 0 0 10px;
+    background: beige;
+    
 
 }
 .Slytherin{
@@ -145,4 +151,10 @@ h1 {
 }
 .Hufflepuff::before{
     background: #FBFF8D;
-  }
+}
+.unknown {
+    color: #7473FF;
+}
+.unknown::before{
+    background: #7473FF;
+}
