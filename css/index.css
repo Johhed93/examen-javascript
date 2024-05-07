@@ -1,11 +1,64 @@
 .container {
+    padding: 20px 30px 30px 30px;
     margin-top: 30px;
     display: flex;
     flex-direction: column;
     gap: 30px;
     align-items: center;
+    background: radial-gradient(circle at 24.1% 68.8%, rgb(50, 50, 50) 0%, rgb(0, 0, 0) 99.4%);
+    border: 1px solid rgba(177, 177, 177, 0.4);
+    width: 85%;
+    margin-inline: auto;
+    border-radius: 30px;
 }
 h1 {
     font-size: 2.5rem;
     color: white;
+}
+.split-content{
+    display: flex;
+    gap: 40px;
+    align-items: stretch;
+    
+}
+.split-box{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    border-radius: 15px;
+    
+}
+.hero-image{
+    max-width: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 15px;
+}
+.text-box{
+    padding: 40px;
+    gap: 20px;
+    background-color: rgba(49, 49, 49, 0.6);
+    color: white;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+.text-box::before{
+    content: "";
+    position: absolute;
+    height: 90%;
+    width: 10px;
+    background: rgba(193, 162, 255, 0.66);
+    left: 0;
+    border-radius: 10px;
+}
+.hero-paragraf{
+    font-size: 1.2rem;
+    line-height: 1.5;
+}
+.devide-content{
+    height: 3px;
+    background: rgb(255, 255, 255, 0.35);
+    width: 100%;
+    border-radius: 3px;
 }
