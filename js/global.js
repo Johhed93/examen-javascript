@@ -1,3 +1,4 @@
+const harryPotter_URL= "https://hp-api.onrender.com/api/characters"
 const userIsLoggedOut = ()=>{
     const navigationList=document.querySelector("#navigationList");
     navigationList.innerHTML="";
@@ -19,4 +20,5 @@ const userIsLoggedOut = ()=>{
     list2.appendChild(login);
     navigationList.appendChild(list2)
 }
-export {userIsLoggedOut}
+
+export {userIsLoggedOut, harryPotter_URL}

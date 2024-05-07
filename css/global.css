@@ -49,3 +49,6 @@ nav {
 .register{
     background: #7473FF;
 }
+button {
+    cursor: pointer;
+}

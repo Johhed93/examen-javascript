@@ -1,5 +1,5 @@
 .container {
-    padding: 20px 30px 30px 30px;
+    padding: 30px;
     margin-top: 30px;
     display: flex;
     flex-direction: column;
@@ -61,4 +61,37 @@ h1 {
     background: rgb(255, 255, 255, 0.35);
     width: 100%;
     border-radius: 3px;
+}
+.big-button {
+    padding: 20px 60px;
+    border: none;
+    outline: none;
+    background: #7473FF;
+    border-radius: 10px;
+    color: white;
+}
+.search-container{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.first-search-row{
+    display: flex;
+    justify-content: space-between;
+
+}
+.column-box{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 5px;
+    color: white;
+}
+.input {
+    padding: 10px ;
+    border-radius: 10px;
+    outline: none;
+    border: none;
+    background: rgb(255, 255, 255, 0.7);
+    
 }

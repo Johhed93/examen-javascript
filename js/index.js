@@ -12,7 +12,7 @@ const fetchHarryData = async()=>{
     }
     const data=await res.json();
     allCharacters=data;
-    console.log(allCharacters)
+    
 
  }catch (error){
     console.error("Något blev fel med fetchning i fetchHarryData", error)
