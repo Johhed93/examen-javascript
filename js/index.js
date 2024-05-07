@@ -11,7 +11,14 @@ const fetchHarryData = async()=>{
         throw new Error("Något blev fel hos databasen i fetchHarryData", res.status)
     }
     const data=await res.json();
-    allCharacters=data;
+
+    const houses= Array.from(new Set(data.map(student=> student.house)));
+    houses.forEach(house => {
+        showHousesButton(house)
+    });
+
+    
+
     
 
  }catch (error){
@@ -20,3 +27,14 @@ const fetchHarryData = async()=>{
 }
 
 fetchHarryData()
+
+const showHousesButton = (house)=>{
+    const hogwartsHouses= document.querySelector("#hogwartsHouses");
+    
+    const button= document.createElement("button");
+    button.value=house;
+    button.innerHTML=house;
+    
+    hogwartsHouses.appendChild(button)
+
+}
