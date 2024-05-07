@@ -69,12 +69,5 @@ const showStatusButton= (data)=> {
     })
     statusClass.appendChild(teacher)
     
-    const neither= document.createElement("button");
-    neither.classList.add("house-btn");
-    neither.innerHTML="Inget av de"
-    neither.addEventListener("click", ()=> {
-        const nothing= data.filter(not=> not.hogwartsStaff===false && not.hogwartsStudent===false)
-        console.log(nothing)
-    })
     
 }

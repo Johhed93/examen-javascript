@@ -46,10 +46,11 @@ h1 {
 .text-box::before{
     content: "";
     position: absolute;
-    height: 90%;
+    height: 95%;
     width: 10px;
     background: rgba(193, 162, 255, 0.66);
     left: 0;
+    top: 2.5%;
     border-radius: 10px;
 }
 .hero-paragraf{
@@ -75,7 +76,7 @@ h1 {
 .search-container{
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 20px;
     width: 100%;
     align-items: center;
 }
