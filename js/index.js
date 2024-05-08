@@ -11,13 +11,12 @@ const fetchHarryData = async()=>{
         throw new Error("Något blev fel hos databasen i fetchHarryData", res.status)
     }
     const data=await res.json();
-
     const houses= Array.from(new Set(data.map(student=> student.house)));
     houses.forEach(house => {
         showHousesButton(house)
     });
-    
     showStatusButton(data)
+
     
  }catch (error){
     console.error("Något blev fel med fetchning i fetchHarryData", error)
@@ -68,6 +67,14 @@ const showStatusButton= (data)=> {
         console.log(teachers);
     })
     statusClass.appendChild(teacher)
-    
+
+    const neither= document.createElement("button");
+    neither.classList.add("house-btn");
+    neither.innerHTML="Inget av det"
+    neither.addEventListener("click", ()=>{
+        const nothing= data.filter(noth=> noth.hogwartsStaff===false && noth.hogwartsStaff===false);
+        console.log(nothing)
+    })
+    statusClass.appendChild(neither)
     
 }

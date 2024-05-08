@@ -5,7 +5,7 @@
     flex-direction: column;
     gap: 30px;
     align-items: center;
-    background: radial-gradient(circle at 24.1% 68.8%, rgb(50, 50, 50) 0%, rgb(0, 0, 0) 99.4%);
+    background: radial-gradient(circle at 24.1% 68.8%, rgb(50, 50, 50) 0%, rgb(24, 24, 24) 99.4%);
     border: 1px solid rgba(177, 177, 177, 0.4);
     width: 85%;
     margin-inline: auto;
@@ -91,7 +91,8 @@ h1 {
     align-items: center;
     flex-direction: column;
     gap: 10px;
-    color: white;
+    color: rgb(207, 134, 255);
+    
     
 }
 .input {
@@ -100,7 +101,7 @@ h1 {
     outline: none;
     border: none;
     background: rgb(255, 255, 255, 0.7);
-    width: 214px;
+    width: 348px;
 }
 .button-container {
     display: flex;
