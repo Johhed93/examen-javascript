@@ -4,6 +4,7 @@ userIsLoggedOut()
 
 let allCharacters;
 const characterList= document.querySelector("#characterList");
+const titleOfContent= document.querySelector("#titleOfContent")
 
 const fetchHarryData = async()=>{
  try{
@@ -67,7 +68,7 @@ const showStatusButton= (data)=> {
         const teachers= data.filter(teacher=> teacher.hogwartsStaff===true);
         characterList.innerHTML=""
         teachers.forEach(teach=>{
-            
+            titleOfContent.innerHTML="Alla anställda på hogwarts"
             showCharacters(teach)
         })
     })
@@ -85,11 +86,14 @@ const showStatusButton= (data)=> {
 
 const showCharacters = (user)=> {
     const container= document.createElement("div");
-    if(!user.house===""){
+    container.classList.add("character-box");
+    if(user.house===""){
+        container.classList.add("unknown")
+    }else{
         container.classList.add(`${user.house}`)
     }
     
-    container.classList.add("character-box");
+    
     const characterName= document.createElement("h3");
     characterName.classList.add("character-name");
     characterName.innerHTML=user.name;
@@ -98,7 +102,12 @@ const showCharacters = (user)=> {
     const secondRow= document.createElement("div");
     secondRow.classList.add("row-box");
     const image= document.createElement("img")
-    image.src=user.image;
+    if(user.image===""){
+        image.src="./assets/wizard.png"
+    }else{
+        image.src=user.image;
+    }
+    
     image.classList.add("character-image")
     image.alt=`Bilde av ${user.name}`
     secondRow.appendChild(image);
@@ -139,7 +148,12 @@ const showCharacters = (user)=> {
     list.appendChild(alive)
 
     const showMoreBtn= document.createElement("button");
-    showMoreBtn.classList.add("read-more");
+    showMoreBtn.classList.add("house-btn");
+    if(user.house===""){
+        showMoreBtn.classList.add("unknown")
+    }else{
+        showMoreBtn.classList.add(`${user.house}`)
+    }
     showMoreBtn.innerHTML=`Läs mer <i class="fa-solid fa-eye"></i>`
     textContainer.appendChild(showMoreBtn)
     characterList.appendChild(container)

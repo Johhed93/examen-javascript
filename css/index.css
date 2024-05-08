@@ -92,8 +92,6 @@ h1 {
     flex-direction: column;
     gap: 10px;
     color: rgb(207, 134, 255);
-    
-    
 }
 .input {
     padding: 10px ;
@@ -140,7 +138,7 @@ h1 {
 }
 .Ravenclaw {
     color: #94F4FF;
-    position: relative;
+    
 }
 .Ravenclaw::before{
   background: #94F4FF;
@@ -148,44 +146,51 @@ h1 {
 }
 .Gryffindor{
     color: #FF7E7E;
-    position: relative;
+    
 }
 .Gryffindor::before{
   background: #FF7E7E;
 }
 .Hufflepuff{
  color: #FBFF8D;
- position: relative;
+ 
 }
 .Hufflepuff::before{
     background: #FBFF8D;
 }
 .unknown {
     color: #7473FF;
-    position: relative;
+    
 }
 .unknown::before{
     background: #7473FF;
+}
+.character-container{
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
 }
 .character-box{
     display: flex;
     flex-direction: column;
     gap: 10px;
-    padding: 10px 50px 30px 30px;
+    padding: 10px 30px 30px 30px;
     align-items: center;
     color: white;
     background-color: rgb(65, 65, 65, 0.65);
     border-radius: 15px;
-    
+    position: relative;
 }
-.character-box::after{
+.character-box::before{
   content: "";
   position:absolute;
   left: 0;
   top: 5%;
   width: 8px;
   height: 90%;
-  background: #FF7E7E;
+ 
   border-radius: 10px;
 }
 .row-box{
