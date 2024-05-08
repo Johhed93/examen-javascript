@@ -76,5 +76,9 @@ const showStatusButton= (data)=> {
         console.log(nothing)
     })
     statusClass.appendChild(neither)
+}
+
+const showCharacters = (user)=> {
+    const characterList= document.querySelector("#characterList");
     
 }
