@@ -56,19 +56,22 @@ const showStatusButton= (data)=> {
     student.classList.add("house-btn");
     student.innerHTML="Student";
     student.addEventListener("click", ()=>{
+    titleOfContent.innerHTML="Alla elever på hogwarts"
    const students= data.filter(student=> student.hogwartsStudent===true);
-   console.log(students)
+   students.forEach(student=>{
+    showCharacters(student)
+   })
     })
     statusClass.appendChild(student)
 
     const teacher= document.createElement("button");
     teacher.classList.add("house-btn");
-    teacher.innerHTML="Teacher";
+    teacher.innerHTML="Lärare";
     teacher.addEventListener("click", ()=> {
         const teachers= data.filter(teacher=> teacher.hogwartsStaff===true);
         characterList.innerHTML=""
+        titleOfContent.innerHTML="Alla anställda på hogwarts"
         teachers.forEach(teach=>{
-            titleOfContent.innerHTML="Alla anställda på hogwarts"
             showCharacters(teach)
         })
     })
@@ -78,8 +81,12 @@ const showStatusButton= (data)=> {
     neither.classList.add("house-btn");
     neither.innerHTML="Inget av det"
     neither.addEventListener("click", ()=>{
-        const nothing= data.filter(noth=> noth.hogwartsStaff===false && noth.hogwartsStaff===false);
-        console.log(nothing)
+        characterList.innerHTML=""
+        const nothing= data.filter(noth=> noth.hogwartsStaff===false && noth.hogwartsStudent===false);
+        titleOfContent.innerHTML="De som inte jobbar eller är elever på hogwarts"
+        nothing.forEach(person=>{
+            showCharacters(person)
+        })
     })
     statusClass.appendChild(neither)
 }
