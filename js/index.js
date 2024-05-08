@@ -3,6 +3,7 @@ import { userIsLoggedOut, harryPotter_URL } from "./global.js";
 userIsLoggedOut()
 
 let allCharacters;
+const characterList= document.querySelector("#characterList");
 
 const fetchHarryData = async()=>{
  try{
@@ -64,7 +65,11 @@ const showStatusButton= (data)=> {
     teacher.innerHTML="Teacher";
     teacher.addEventListener("click", ()=> {
         const teachers= data.filter(teacher=> teacher.hogwartsStaff===true);
-        console.log(teachers);
+        characterList.innerHTML=""
+        teachers.forEach(teach=>{
+            
+            showCharacters(teach)
+        })
     })
     statusClass.appendChild(teacher)
 
@@ -79,6 +84,65 @@ const showStatusButton= (data)=> {
 }
 
 const showCharacters = (user)=> {
-    const characterList= document.querySelector("#characterList");
+    const container= document.createElement("div");
+    if(!user.house===""){
+        container.classList.add(`${user.house}`)
+    }
+    
+    container.classList.add("character-box");
+    const characterName= document.createElement("h3");
+    characterName.classList.add("character-name");
+    characterName.innerHTML=user.name;
+    container.appendChild(characterName);
+
+    const secondRow= document.createElement("div");
+    secondRow.classList.add("row-box");
+    const image= document.createElement("img")
+    image.src=user.image;
+    image.classList.add("character-image")
+    image.alt=`Bilde av ${user.name}`
+    secondRow.appendChild(image);
+    container.appendChild(secondRow);
+
+    const textContainer= document.createElement("div");
+    textContainer.classList.add("text-content");
+    secondRow.appendChild(textContainer)
+    
+    const list=document.createElement("ul");
+    list.classList.add("list");
+    const house= document.createElement("li");
+    textContainer.appendChild(list)
+
+    house.innerHTML=`Hus: ${user.house}`;
+    list.appendChild(house);
+    const gender= document.createElement("li");
+    gender.innerHTML= `Kön: ${user.gender}`;
+    list.appendChild(gender);
+
+    const status= document.createElement("li");
+    if(user.hogwartsStaff){
+        status.innerHTML=`Status: Lärare`
+    }
+    else if(user.hogwartsStudent){
+        status.innerHTML=`Status: Student`
+    }else{
+        status.innerHTML=`Status: Är inte på hogwarts`
+    }
+    list.appendChild(status);
+
+    const alive= document.createElement("li");
+    if(user.alive){
+        alive.innerHTML=`Levande: Ja`
+    }else{
+        alive.innerHTML=`Levande: Nej`
+    }
+    list.appendChild(alive)
+
+    const showMoreBtn= document.createElement("button");
+    showMoreBtn.classList.add("read-more");
+    showMoreBtn.innerHTML=`Läs mer <i class="fa-solid fa-eye"></i>`
+    textContainer.appendChild(showMoreBtn)
+    characterList.appendChild(container)
+
     
 }
