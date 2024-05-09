@@ -18,6 +18,7 @@ const fetchHarryData = async()=>{
         showHousesButton(house)
     });
     showStatusButton(data)
+    showNextSet()
 
     
  }catch (error){
@@ -90,7 +91,21 @@ const showStatusButton= (data)=> {
     })
     statusClass.appendChild(neither)
 }
+const showNextSet = ()=>{
+ const showNextContainer= document.querySelector("#showNextContainer");
+ const previousButton= document.createElement("button");
+ previousButton.innerHTML=`Nästa sida`;
+ previousButton.classList.add("big-button");
 
+ 
+
+ const nextButton=document.createElement("button");
+ nextButton.innerHTML=`Visa föregående sida`;
+ nextButton.classList.add("big-button");
+ 
+ showNextContainer.appendChild(nextButton)
+ showNextContainer.appendChild(previousButton);
+}
 const showCharacters = (user)=> {
     const container= document.createElement("div");
     container.classList.add("character-box");
