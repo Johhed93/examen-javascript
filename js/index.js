@@ -28,24 +28,21 @@ const fetchHarryData = async () => {
 
 fetchHarryData();
 const showSearchBar=(data)=> {
+  console.log(data)
   const searchBar= document.querySelector("#searchBar");
   const inputField= document.createElement("input");
   inputField.classList.add("input");
   inputField.placeholder="Harry Potter";
-  searchBar.appendChild(inputField);
+  
 
   inputField.addEventListener("keyup", (e)=>{
-    const input= e.target.value.toLowerCase();
-    currentCharacterList=data.filter(character=>character.name.toLowerCase()===input)
-    console.log(currentCharacterList)
-    console.log(input)
-    if(input.length===0){
-      return;
-    }
-    currentPage=1
-    characterList.innerHTML="";
-    displayData()
+    let input= e.target.value.toLowerCase();
+    currentCharacterList=data.filter(character=>character.name.toLowerCase().includes(input))
+      currentPage=1
+      characterList.innerHTML="";
+      displayData()
   })
+  searchBar.appendChild(inputField);
 }
 
 const showHousesButton = (data) => {
