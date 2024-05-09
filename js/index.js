@@ -17,10 +17,7 @@ const fetchHarryData = async () => {
       throw new Error("Något blev fel hos databasen i fetchHarryData", res.status);
     }
     const data = await res.json();
-    const houses = Array.from(new Set(data.map((student) => student.house)));
-    houses.forEach((house) => {
-      showHousesButton(house);
-    });
+    showHousesButton(data)
     showStatusButton(data);
     
   } catch (error) {
@@ -30,23 +27,33 @@ const fetchHarryData = async () => {
 
 fetchHarryData();
 
-const showHousesButton = (house) => {
-  const hogwartsHouses = document.querySelector("#hogwartsHouses");
+const showHousesButton = (data) => {
+    const houses = Array.from(new Set(data.map((student) => student.house)));
+    const hogwartsHouses = document.querySelector("#hogwartsHouses");
+    houses.forEach((house) => {
+        const button = document.createElement("button");
 
-  const button = document.createElement("button");
+        button.classList.add("house-btn");
+        if (house === "") {
+          button.classList.add("unknown");
+          button.innerHTML = "Inget hus";
+          button.setAttribute("value", '""');
+        } else {
+          button.classList.add(`${house}`);
+          button.innerHTML = house;
+          button.setAttribute("value", `${house}`);
+        }
+        button.addEventListener("click", ()=>{
+        characterList.innerHTML=""
+        currentPage=1
+        currentCharacterList=data.filter(specificHouse=> specificHouse.house===button.value);
+        console.log(data)
+        console.log(currentCharacterList)
+        displayData();
 
-  button.classList.add("house-btn");
-  if (house === "") {
-    button.classList.add("unknown");
-    button.innerHTML = "Inget hus";
-    button.setAttribute("value", '""');
-  } else {
-    button.classList.add(`${house}`);
-    button.innerHTML = house;
-    button.setAttribute("value", `${house}`);
-  }
-
-  hogwartsHouses.appendChild(button);
+        })
+        hogwartsHouses.appendChild(button);
+    });
 };
 const showStatusButton = (data) => {
   const statusClass = document.querySelector("#statusClass");
