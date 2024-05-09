@@ -104,6 +104,7 @@ h1 {
 .button-container {
     display: flex;
     gap: 10px;
+    align-items: center;
 }
 .house-btn {
     padding: 10px 30px;

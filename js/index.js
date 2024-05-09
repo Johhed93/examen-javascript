@@ -55,10 +55,10 @@ const showStatusButton = (data) => {
   student.innerHTML = "Student";
   student.addEventListener("click", () => {
     titleOfContent.innerHTML = "Alla elever på hogwarts";
-    const students = data.filter((student) => student.hogwartsStudent === true);
-    students.forEach((student) => {
-      showCharacters(student);
-    });
+    characterList.innerHTML = "";
+    currentCharacterList = data.filter((student) => student.hogwartsStudent === true);
+    currentPage=1
+    displayData()
   });
   statusClass.appendChild(student);
 
@@ -66,12 +66,11 @@ const showStatusButton = (data) => {
   teacher.classList.add("house-btn");
   teacher.innerHTML = "Lärare";
   teacher.addEventListener("click", () => {
-    const teachers = data.filter((teacher) => teacher.hogwartsStaff === true);
+    currentPage=1
+    currentCharacterList = data.filter((teacher) => teacher.hogwartsStaff === true);
     characterList.innerHTML = "";
     titleOfContent.innerHTML = "Alla anställda på hogwarts";
-    teachers.forEach((teach) => {
-      showCharacters(teach);
-    });
+    displayData()
   });
   statusClass.appendChild(teacher);
 
@@ -79,12 +78,11 @@ const showStatusButton = (data) => {
   neither.classList.add("house-btn");
   neither.innerHTML = "Inget av det";
   neither.addEventListener("click", () => {
+    currentPage=1
     characterList.innerHTML = "";
-    const nothing = data.filter((noth) => noth.hogwartsStaff === false && noth.hogwartsStudent === false);
+    currentCharacterList = data.filter((noth) => noth.hogwartsStaff === false && noth.hogwartsStudent === false);
     titleOfContent.innerHTML = "De som inte jobbar eller är elever på hogwarts";
-    currentCharacterList=nothing
     displayData();
-
   });
   statusClass.appendChild(neither);
 };
@@ -120,9 +118,9 @@ const showNextSet = () => {
     showNextContainer.appendChild(previousButton);
   }
   const showCurrentPage= document.createElement("p");
-  showCurrentPage.innerHTML=`${currentPage} / ${Math.trunc(currentCharacterList.length/charactersPerPage)}`
+  showCurrentPage.innerHTML=`${currentPage} / ${Math.ceil(currentCharacterList.length/charactersPerPage)}`
   showNextContainer.appendChild(showCurrentPage);
-  
+
   if(currentCharacterList.length/currentPage>charactersPerPage){
   const nextButton = document.createElement("button");
   nextButton.innerHTML = `Visa nästa sida`;
