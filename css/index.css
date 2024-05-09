@@ -100,6 +100,7 @@ h1 {
     border: none;
     background: rgb(255, 255, 255, 0.7);
     width: 348px;
+    font-family: "Yanone Kaffeesatz", sans-serif;
 }
 .button-container {
     display: flex;
