@@ -147,11 +147,6 @@ const showNextSet = () => {
 const showCharacters = (user) => {
   const container = document.createElement("div");
   container.classList.add("character-box");
-  if (user.house === "") {
-    container.classList.add("unknown");
-  } else {
-    container.classList.add(`${user.house}`);
-  }
 
   const characterName = document.createElement("h3");
   characterName.classList.add("character-name");
@@ -193,7 +188,7 @@ const showCharacters = (user) => {
   } else if (user.hogwartsStudent) {
     status.innerHTML = `Status: Student`;
   } else {
-    status.innerHTML = `Status: Är inte på hogwarts`;
+    status.innerHTML = `Status: Okänt`;
   }
   list.appendChild(status);
 
@@ -208,9 +203,12 @@ const showCharacters = (user) => {
   const showMoreBtn = document.createElement("button");
   showMoreBtn.classList.add("house-btn");
   if (user.house === "") {
+    container.classList.add("unknown");
     showMoreBtn.classList.add("unknown");
+    house.innerHTML=`Hus: Okänt`
   } else {
     showMoreBtn.classList.add(`${user.house}`);
+    container.classList.add(`${user.house}`)
   }
   showMoreBtn.innerHTML = `Läs mer <i class="fa-solid fa-eye"></i>`;
   textContainer.appendChild(showMoreBtn);
