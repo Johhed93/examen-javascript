@@ -37,17 +37,17 @@ const showHousesButton = (data) => {
         if (house === "") {
           button.classList.add("unknown");
           button.innerHTML = "Inget hus";
-          button.setAttribute("value", '""');
+          
         } else {
           button.classList.add(`${house}`);
           button.innerHTML = house;
-          button.setAttribute("value", `${house}`);
         }
+        button.setAttribute("value", `${house}`);
         button.addEventListener("click", ()=>{
         characterList.innerHTML=""
         currentPage=1
         currentCharacterList=data.filter(specificHouse=> specificHouse.house===button.value);
-        console.log(data)
+        console.log(button.value)
         console.log(currentCharacterList)
         displayData();
 
