@@ -89,7 +89,7 @@ const showStatusButton = (data) => {
   statusClass.appendChild(neither);
 };
 
-// Fått hjälp av chatgpt prompt "här har jag alla harry potter karaktärer som är teacher t:ex jag vill bara visa fram 12 åt gången och 
+// Fått hjälp av chatgpt med displayData() prompt "här har jag alla harry potter karaktärer som är teacher t:ex jag vill bara visa fram 12 åt gången och 
 // när jag trycker på en knapp längst ner på dokumentet (inte skapat än) så ska du kunna gå igenom nästa 12 så man inte visar fram 
 // 100 objekter på en gång. hur gör jag det?"
 const displayData = () => {
@@ -102,28 +102,41 @@ const displayData = () => {
     showCharacters(character)
   })
 };
-const nextPage = () => {
-    currentPage++;
-    displayCharacters();
-};
-const previousPage = () => {
-    if (currentPage > 1) {
-        currentPage--;
-        displayCharacters();
-    }
-};
+
 const showNextSet = () => {
   const showNextContainer = document.querySelector("#showNextContainer");
-  const previousButton = document.createElement("button");
-  previousButton.innerHTML = `Nästa sida`;
-  previousButton.classList.add("big-button");
-
+  showNextContainer.innerHTML=""
+  if(currentCharacterList.length<12){
+    return
+  }
+  if(currentPage>1){
+    const previousButton = document.createElement("button");
+    previousButton.innerHTML = `Visa föregående sida`;
+    previousButton.classList.add("big-button");
+    previousButton.addEventListener("click", ()=>{
+            currentPage--;
+            displayData();
+    })
+    showNextContainer.appendChild(previousButton);
+  }
+  const showCurrentPage= document.createElement("p");
+  showCurrentPage.innerHTML=`${currentPage} / ${Math.trunc(currentCharacterList.length/charactersPerPage)}`
+  showNextContainer.appendChild(showCurrentPage);
+  
+  if(currentCharacterList.length/currentPage>charactersPerPage){
   const nextButton = document.createElement("button");
-  nextButton.innerHTML = `Visa föregående sida`;
+  nextButton.innerHTML = `Visa nästa sida`;
   nextButton.classList.add("big-button");
-
+  nextButton.addEventListener("click", ()=>{
+    currentPage++;
+      displayData();
+      console.log(currentCharacterList)
+    
+  });
   showNextContainer.appendChild(nextButton);
-  showNextContainer.appendChild(previousButton);
+}
+
+  
   
 };
 const showCharacters = (user) => {
