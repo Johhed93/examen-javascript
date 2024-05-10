@@ -30,5 +30,11 @@ const userIsLoggedOut = ()=>{
     list2.appendChild(login);
     navigationList.appendChild(list2)
 }
+const displayError= (message)=>{
+    errorMsg.innerHTML=message
+    setTimeout(() => {
+        return errorMsg.innerHTML=""
+    }, 3000);
+} 
 
-export {userIsLoggedOut, harryPotter_URL, key, database_url, getHeaders}
+export {userIsLoggedOut, harryPotter_URL, key, database_url, getHeaders, displayError}
