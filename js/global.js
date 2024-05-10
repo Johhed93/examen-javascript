@@ -16,7 +16,7 @@ const setLoggedInUser = (id) => {
   const getLoggedInUser = () => {
     return JSON.parse(sessionStorage.getItem("loggedInUser"));
   };
-  
+
 //login state
 const userIsLoggedOut = ()=>{
     const navigationList=document.querySelector("#navigationList");
@@ -47,4 +47,4 @@ const displayError= (message)=>{
 } 
 
 
-export {userIsLoggedOut, harryPotter_URL, key, database_url, getHeaders, displayError}
+export {userIsLoggedOut, harryPotter_URL, key, database_url, getHeaders, displayError, setLoggedInUser,getLoggedInUser}
