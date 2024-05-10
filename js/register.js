@@ -9,7 +9,7 @@ const registerUser = async ()=> {
  const repeatPassword=document.querySelector("#repeatPasswordInput").value;
  const errorMsg=document.querySelector("#errorMsg");
  if(password!==repeatPassword){
-  displayError("Passordet matchar inte")
+  return displayError("Passordet matchar inte")
  }
  const user= [{
     name:fName,
@@ -20,8 +20,8 @@ const registerUser = async ()=> {
  }]
 
  try {
-  if(verifyUsername(username)){
-    displayError("Användarnamnet finns redan")
+  if(await verifyUsername(username)){
+    return displayError("Användarnamnet finns redan")
    }
   const res= await fetch(database_url,{
   method:"POST",
@@ -47,13 +47,16 @@ const verifyUsername= async(username)=>{
         throw new Error("Något blev fel i databasen för verifiering av username", res.status)
     }
     const data= await res.json();
-    console.log (data.items.some(user=> user.username===username))
+    return data.items.some(user=> user.username===username)
     }catch(error){
         console.error("Något blev fel i verifiering av databasen", error)
     }
 }
 const submitFormBtn=document.querySelector("#submitFormBtn");
-submitFormBtn.addEventListener("click", registerUser)
+submitFormBtn.addEventListener("click", async(e)=>{
+    e.preventDefault();
+    await registerUser();
+})
 const getData = async()=>{
     try{
         const res=await fetch(database_url,{
