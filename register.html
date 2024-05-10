@@ -41,25 +41,26 @@
         <form action="#" class="form-field">
           <div class="input-box">
             <label for="fNameInput">Förnavn</label>
-            <input type="text" id="fNameInput" />
+            <input type="text" id="fNameInput" required />
           </div>
           <div class="input-box">
             <label for="lNameInput">Etternavn</label>
-            <input type="text" id="lNameInput" />
+            <input type="text" id="lNameInput" required />
           </div>
           <div class="input-box">
             <label for="usernameInput">Användarnamn</label>
-            <input type="text" id="usernameInput" />
+            <input type="text" id="usernameInput" required />
           </div>
           <div class="input-box">
             <label for="passwordInput">Lösenord</label>
-            <input type="password" id="passwordInput" />
+            <input type="password" id="passwordInput" required  />
           </div>
           <div class="input-box">
             <label for="repeatPasswordInput">Återupprepa lösenordet</label>
-            <input type="password" id="repeatPasswordInput" />
+            <input type="password" id="repeatPasswordInput" required />
           </div>
-          <button type="submit" class="submit-btn">Registrera</button>
+          <p id="errorMsg"></p>
+          <button type="submit" class="submit-btn" id="submitFormBtn">Registrera</button>
         </form>
       </div>
     </main>

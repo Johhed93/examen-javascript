@@ -56,3 +56,8 @@ input {
     border-radius: 8px;
     background: rgb(207, 134, 255);
 }
+#errorMsg{
+    font-size: 1.2rem;
+    font-style: italic;
+    color: rgb(255, 112, 112);
+}
