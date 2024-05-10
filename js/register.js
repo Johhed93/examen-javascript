@@ -1,4 +1,4 @@
-import { database_url, userIsLoggedOut, getHeaders, displayError } from "./global.js";
+import { database_url, userIsLoggedOut, getHeaders, displayError, setLoggedInUser } from "./global.js";
 userIsLoggedOut();
 
 const registerUser = async ()=> {
@@ -32,6 +32,9 @@ const registerUser = async ()=> {
     throw new Error("Något är fel i databasen", res.status)
   }
   const data=await res.json();
+  setLoggedInUser(data.items._uuid);
+
+
  }catch(error){
     console.error("Något blev fel med post av använderen", error)
    displayError("Något blev fel försök igen")
@@ -44,6 +47,7 @@ const verifyUsername= async(username)=>{
         headers:getHeaders()
     });
     if(!res.ok){
+        displayError("Något blev fel försök igen")
         throw new Error("Något blev fel i databasen för verifiering av username", res.status)
     }
     const data= await res.json();
@@ -67,10 +71,18 @@ const getData = async()=>{
             throw new Error("Något blev fel i databasen för verifiering av username", res.status)
         }
         const data= await res.json();
-        console.log(data)
+        
 
     }catch(error){
         console.error(error)
     }
 }
-getData();
+const succesfullRegistration = (user)=>{
+const div = document.createElement("div");
+const headline=document.createElement("h2");
+headline.innerHTML=`Välkommen till oss ${user.name}`;
+
+
+
+}
+
