@@ -33,7 +33,7 @@ const userIsLoggedOut = ()=>{
 const displayError= (message)=>{
     errorMsg.innerHTML=message
     setTimeout(() => {
-        return errorMsg.innerHTML=""
+    errorMsg.innerHTML=""
     }, 3000);
 } 
 
