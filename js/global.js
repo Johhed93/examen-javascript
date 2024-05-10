@@ -1,6 +1,14 @@
+//Databasfunktioner
 const harryPotter_URL= "https://hp-api.onrender.com/api/characters"
 const key= "TCRU4bcWoBMSCPlYvhlY7Cyv9Z9NijWGCLGFyEAYv0Bcw05NqQ"
 const database_url="https://crudapi.co.uk/api/v1/userbase"
+const getHeaders=()=>{
+    return {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${key}`,
+      };
+}
+//Login state 
 const userIsLoggedOut = ()=>{
     const navigationList=document.querySelector("#navigationList");
     navigationList.innerHTML="";
@@ -23,4 +31,4 @@ const userIsLoggedOut = ()=>{
     navigationList.appendChild(list2)
 }
 
-export {userIsLoggedOut, harryPotter_URL, key, database_url}
+export {userIsLoggedOut, harryPotter_URL, key, database_url, getHeaders}
