@@ -8,7 +8,16 @@ const getHeaders=()=>{
         "Authorization": `Bearer ${key}`,
       };
 }
-//Login state 
+
+//Login funktioner 
+const setLoggedInUser = (id) => {
+    return sessionStorage.setItem("loggedInUser", JSON.stringify(id));
+  };
+  const getLoggedInUser = () => {
+    return JSON.parse(sessionStorage.getItem("loggedInUser"));
+  };
+  
+//login state
 const userIsLoggedOut = ()=>{
     const navigationList=document.querySelector("#navigationList");
     navigationList.innerHTML="";
@@ -36,5 +45,6 @@ const displayError= (message)=>{
     errorMsg.innerHTML=""
     }, 3000);
 } 
+
 
 export {userIsLoggedOut, harryPotter_URL, key, database_url, getHeaders, displayError}
