@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Registering</title>
     <link rel="stylesheet" href="./css/global.css" />
     <link rel="stylesheet" href="./css/register.css" />
@@ -23,36 +23,46 @@
     />
 
     <script src="./js/register.js" type="module"></script>
-    
-</head>
-<body>
-    <header>
-        <nav>
-          <div class="logo-container">
-            <a href="./index.html" class="logo"
-              ><i class="fa-solid fa-hat-wizard logo-icon"></i> Harry Potter world</a
-            >
+  </head>
+  <body>
+    <header class="fixed-header">
+      <nav>
+        <div class="logo-container">
+          <a href="./index.html" class="logo"
+            ><i class="fa-solid fa-hat-wizard logo-icon"></i> Harry Potter world</a
+          >
+        </div>
+        <ul class="navigation-list" id="navigationList"></ul>
+      </nav>
+    </header>
+    <main class="center-content">
+      <div class="form-container">
+        <h1>Registrera dig hos oss</h1>
+        <form action="#" class="form-field">
+          <div class="input-box">
+            <label for="fNameInput">Förnavn</label>
+            <input type="text" id="fNameInput" />
           </div>
-          <ul class="navigation-list" id="navigationList"></ul>
-        </nav>
-      </header>
-      <main>
-        <div>
-          <h1>Registrera dig hos oss</h1>
-        <form action="#">
-          <label for="fNameInput">Förnavn</label>
-          <input type="text" id="fNameInput">
-          <label for="lNameInput">Etternavn</label>
-          <input type="text" id="lNameInput">
-          <label for="usernameInput">Användarnamn</label>
-          <input type="text" id="usernameInput">
-          <label for="passwordInput">Lösenord</label>
-          <input type="password" id="passwordInput">;
-          <button type="submit">Registrera</button>
-
+          <div class="input-box">
+            <label for="lNameInput">Etternavn</label>
+            <input type="text" id="lNameInput" />
+          </div>
+          <div class="input-box">
+            <label for="usernameInput">Användarnamn</label>
+            <input type="text" id="usernameInput" />
+          </div>
+          <div class="input-box">
+            <label for="passwordInput">Lösenord</label>
+            <input type="password" id="passwordInput" />
+          </div>
+          <div class="input-box">
+            <label for="repeatPasswordInput">Återupprepa lösenordet</label>
+            <input type="password" id="repeatPasswordInput" />
+          </div>
+          <button type="submit" class="submit-btn">Registrera</button>
         </form>
       </div>
-      </main>
-      <footer></footer>
-</body>
+    </main>
+    <footer></footer>
+  </body>
 </html>

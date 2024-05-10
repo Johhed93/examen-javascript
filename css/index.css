@@ -84,11 +84,9 @@ h1 {
 .input {
     padding: 10px ;
     border-radius: 10px;
-    outline: none;
-    border: none;
-    background: rgb(255, 255, 255, 0.7);
+    
     width: 348px;
-    font-family: "Yanone Kaffeesatz", sans-serif;
+    
 }
 .button-container {
     display: flex;
