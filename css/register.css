@@ -44,5 +44,13 @@ input {
     border-radius: 8px;
     outline: none;
     border: none;
-    background: rgb(255, 255, 255, 0.6);
+    background: rgb(255, 255, 255, 0.7);
+}
+.submit-btn {
+    padding: 20px 0;
+    font-size: 1.3rem;
+    border: none;
+    outline: none;
+    border-radius: 8px;
+    background: rgb(207, 134, 255);
 }
