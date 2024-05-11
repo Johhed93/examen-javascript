@@ -13,7 +13,7 @@ const registerUser = async () => {
   const username = document.querySelector("#usernameInput").value.toLowerCase();
   const password = document.querySelector("#passwordInput").value;
   const repeatPassword = document.querySelector("#repeatPasswordInput").value;
-  const errorMsg = document.querySelector("#errorMsg");
+  
   if (password !== repeatPassword) {
     return displayError("Passordet matchar inte");
   }
