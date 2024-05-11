@@ -87,7 +87,7 @@ const succesfullRegistration = (user) => {
   const headline = document.createElement("h2");
   headline.innerHTML = `<i class="fa-solid fa-wand-magic-sparkles"></i> Välkommen till oss ${user.name} <i class="fa-solid fa-wand-magic-sparkles"></i>`;
   const message = document.createElement("p");
-  message.innerHTML = `Vi skickar dig vidare till startsidan`;
+  message.innerHTML = `Vi loggar dig in och skickar dig vidare till förstasidan`;
   headline.classList.add("headline");
   headline.style.fontSize="3rem"
   headline.classList.add("message");
