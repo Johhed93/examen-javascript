@@ -40,6 +40,7 @@ const userIsLoggedOut = ()=>{
     navigationList.appendChild(list2)
 }
 const displayError= (message)=>{
+  const errorMsg = document.querySelector("#errorMsg");
     errorMsg.innerHTML=message
     setTimeout(() => {
     errorMsg.innerHTML=""
