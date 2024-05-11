@@ -13,7 +13,7 @@ const registerUser = async () => {
   const username = document.querySelector("#usernameInput").value.toLowerCase();
   const password = document.querySelector("#passwordInput").value;
   const repeatPassword = document.querySelector("#repeatPasswordInput").value;
-  
+
   if (password !== repeatPassword) {
     return displayError("Passordet matchar inte");
   }
@@ -24,7 +24,7 @@ const registerUser = async () => {
       myFavourites: [],
       username: username,
       password: password,
-    },
+    }
   ];
 
   try {
@@ -89,14 +89,13 @@ const succesfullRegistration = (user) => {
   const message = document.createElement("p");
   message.innerHTML = `Vi loggar dig in och skickar dig vidare till förstasidan`;
   headline.classList.add("headline");
-  headline.style.fontSize="3rem"
+  headline.style.fontSize = "3rem";
   headline.classList.add("message");
- 
+
   message.classList.add("message");
 
-  
   registerForm.appendChild(headline);
-  registerForm.appendChild(message)
+  registerForm.appendChild(message);
   setLoggedInUser(user._uuid);
   setTimeout(() => {
     window.location.href = "./index.html";

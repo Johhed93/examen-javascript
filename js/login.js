@@ -12,8 +12,9 @@ const loginUser= async ()=>{
     if(!await verifyLogin(username, password)){ 
     return displayError("Användarnamnet eller lösenordet är fel") 
     }
-    setLoggedInUser(await returnID());
-    /* window.location.href="./index.html"; */
+    
+    setLoggedInUser(await returnID(username))
+    window.location.href="./index.html";
 
 }
 
@@ -44,8 +45,7 @@ const returnID= async (username)=> {
         throw new Error("Något blev fel i returing av id i databasen", res.status);
     }
     const data= await res.json();
-    const findUser= data.items.filter(user=> user.username===username);
-    console.log(findUser)
+    const findUser= data.items.find(user=> user.username===username);
     return findUser._uuid;
     }catch (error){
         console.error("Något blev fel i returnering av ID")
