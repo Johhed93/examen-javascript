@@ -3,8 +3,7 @@ import { userIsLoggedOut, getHeaders, setLoggedInUser, database_url, displayErro
 const loginUser= async ()=>{
     const username= document.querySelector("#usernameInput").value.toLowerCase();
     const password=document.querySelector("#passwordInput").value;
-    if(await verifyLogin()){
-
+    if(!await verifyLogin(username, password)){   
     }
 }
 
@@ -15,9 +14,11 @@ const verifyLogin= async (username, password)=>{
         headers:getHeaders(),
     })
     if(!res.ok){
-        displayError("Försök igen")
+        displayError("Något blev fel försök igen")
         throw new Error("Något blev fel i databasen på verifisering av bruker")
     }
+    const data= await res.json();
+    return data.items.filter(user=> user.username===username && user.password===password)
 
     }catch (error){
         console.error("Något blev fel i verifisering av bruker", error)
