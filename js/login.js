@@ -1,10 +1,17 @@
 import { userIsLoggedOut, getHeaders, setLoggedInUser, database_url, displayError} from "./global.js";
 
+const loginBtn= document.querySelector("#signInBtn");
+loginBtn.addEventListener("click", async(e)=>{
+    e.preventDefault();
+    await loginUser()
+})
 const loginUser= async ()=>{
     const username= document.querySelector("#usernameInput").value.toLowerCase();
     const password=document.querySelector("#passwordInput").value;
-    if(!await verifyLogin(username, password)){   
+    if(!await verifyLogin(username, password)){ 
+    return displayError("Användarnamnet/Lösenordet är fel") 
     }
+
 }
 
 const verifyLogin= async (username, password)=>{
@@ -22,6 +29,22 @@ const verifyLogin= async (username, password)=>{
 
     }catch (error){
         console.error("Något blev fel i verifisering av bruker", error)
+    }
+}
+const returnID= async (username)=> {
+    try {
+    const res= await fetch(database_url,{
+        method:"GET",
+        headers: getHeaders()
+    })
+    if(!res.ok){
+        throw new Error("Något blev fel i returing av id i databasen", res.status);
+    }
+    const data= await res.json();
+    const findUser= data.filter(user=> user.username===username);
+    return findUser._uuid;
+    }catch (error){
+        console.error("Något blev fel i returnering av ID")
     }
 }
 userIsLoggedOut()
