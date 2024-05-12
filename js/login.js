@@ -1,4 +1,4 @@
-import { userIsLoggedOut, getHeaders, setLoggedInUser, database_url, displayError} from "./global.js";
+import { userIsLoggedOut, getHeaders, setLoggedInUser, database_url, displayError, checkIfLoggedIn} from "./global.js";
 
 const loginBtn= document.querySelector("#signInBtn");
 loginBtn.addEventListener("click", async(e)=>{
@@ -51,4 +51,4 @@ const returnID= async (username)=> {
         console.error("Något blev fel i returnering av ID")
     }
 }
-userIsLoggedOut()
+checkIfLoggedIn()

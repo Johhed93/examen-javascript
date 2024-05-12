@@ -4,9 +4,10 @@ import {
   getHeaders,
   displayError,
   setLoggedInUser,
+  checkIfLoggedIn
 } from "./global.js";
-userIsLoggedOut();
 
+checkIfLoggedIn();
 const registerUser = async () => {
   const fName = document.querySelector("#fNameInput").value;
   const lName = document.querySelector("#lNameInput").value;
