@@ -1,6 +1,6 @@
-import { userIsLoggedOut, harryPotter_URL } from "./global.js";
+import { userIsLoggedOut, harryPotter_URL, userIsLoggedIn, checkIfLoggedIn} from "./global.js";
 
-userIsLoggedOut();
+checkIfLoggedIn()
 
 const characterList = document.querySelector("#characterList");
 const titleOfContent = document.querySelector("#titleOfContent");
