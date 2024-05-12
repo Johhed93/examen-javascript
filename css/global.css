@@ -10,6 +10,18 @@ body {
 header{
     padding: 40px 0;
 }
+.center-content{
+    height: 100dvh;
+    display: grid;
+    place-items: center;
+    background-image: url("../assets/hogwarts-3476786_1920.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.fixed-header{
+    position: fixed;
+    width: 100%;
+}
 nav {
     display: flex;
     width: 85%;
