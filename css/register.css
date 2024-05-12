@@ -51,12 +51,25 @@ input {
     font-style: italic;
     color: rgb(255, 112, 112);
 }
+.headline{
+    font-size: 3rem;
+    color: #7473FF;
+}
 .message{
     font-size: 1.5rem;
-    background: #24AACF;
-    background: linear-gradient(to right, #24AACF 0%, #E438CB 100%);
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: white;
+}
+.password-container{
     position: relative;
+}
+.change-state{
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #3434ff;
+    background: none;
+    outline: none;
+    border: none;
     
 }

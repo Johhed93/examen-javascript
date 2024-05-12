@@ -79,6 +79,15 @@ const displayError= (message)=>{
     errorMsg.innerHTML=""
     }, 3000);
 } 
+const seePassword= (input,element)=>{
+  if(input.type==="password"){
+  element.innerHTML=`<i class="fa-solid fa-eye-slash"></i>`
+  input.type="text"
+  }else{
+    input.type="password"
+    element.innerHTML=`<i class="fa-solid fa-eye"></i>`
+  }
+}
 
 
-export {key, database_url, getHeaders, displayError, setLoggedInUser,getLoggedInUser, checkIfLoggedIn, firstBigLetter}
+export {database_url, getHeaders, displayError, setLoggedInUser,getLoggedInUser, checkIfLoggedIn, firstBigLetter, seePassword}

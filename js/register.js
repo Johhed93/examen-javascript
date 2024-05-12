@@ -3,8 +3,10 @@ import {
   getHeaders,
   displayError,
   setLoggedInUser,
-  checkIfLoggedIn
+  checkIfLoggedIn,
+  seePassword
 } from "./global.js";
+
 
 checkIfLoggedIn();
 const registerUser = async () => {
@@ -89,9 +91,6 @@ const succesfullRegistration = (user) => {
   const message = document.createElement("p");
   message.innerHTML = `Vi loggar dig in och skickar dig vidare till förstasidan`;
   headline.classList.add("headline");
-  headline.style.fontSize = "3rem";
-  headline.classList.add("message");
-
   message.classList.add("message");
 
   registerForm.appendChild(headline);
@@ -101,3 +100,13 @@ const succesfullRegistration = (user) => {
     window.location.href = "./index.html";
   }, 3000);
 };
+const seeFirstPassword= document.querySelector("#seeFirstPassword");
+seeFirstPassword.addEventListener("click", ()=> {
+  const password = document.querySelector("#passwordInput")
+  seePassword(password,seeFirstPassword)
+})
+const seeRepetedPassword= document.querySelector("#seeRepetedPassword");
+seeRepetedPassword.addEventListener("click", ()=>{
+  const repeatPassword = document.querySelector("#repeatPasswordInput")
+  seePassword(repeatPassword,seeRepetedPassword)
+})
