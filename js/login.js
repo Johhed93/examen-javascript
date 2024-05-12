@@ -15,7 +15,6 @@ const loginUser= async ()=>{
     
     setLoggedInUser(await returnID(username))
     window.location.href="./index.html";
-
 }
 
 const verifyLogin= async (username, password)=>{
