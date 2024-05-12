@@ -1,4 +1,4 @@
-import {checkIfLoggedIn} from "./global.js";
+import {checkIfLoggedIn, firstBigLetter} from "./global.js";
 
 checkIfLoggedIn()
 const harryPotter_URL= "https://hp-api.onrender.com/api/characters"
@@ -199,7 +199,7 @@ const showCharacters = (user) => {
   house.innerHTML = `Hus: ${user.house}`;
   list.appendChild(house);
   const gender = document.createElement("li");
-  gender.innerHTML = `Kön: ${user.gender}`;
+  gender.innerHTML = `Kön: ${firstBigLetter(user.gender)}`;
   list.appendChild(gender);
 
   const status = document.createElement("li");
@@ -233,7 +233,7 @@ const showCharacters = (user) => {
     showMoreBtn.classList.add(`${user.house}`);
     container.classList.add(`${user.house}`)
   }
-  showMoreBtn.innerHTML = `Läs mer <i class="fa-solid fa-eye"></i>`;
+  showMoreBtn.innerHTML = `Läs mer`;
   textContainer.appendChild(showMoreBtn);
   characterList.appendChild(container);
 };
