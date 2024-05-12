@@ -165,7 +165,6 @@ const showNextSet = () => {
   
 };
 const showCharacters = (user) => {
-  console.log(user)
   const container = document.createElement("div");
   container.classList.add("character-box");
 
@@ -222,6 +221,8 @@ const showCharacters = (user) => {
   list.appendChild(alive);
 
   const showMoreBtn = document.createElement("a");
+
+  //https://medium.com/@cyberbotmachines/how-to-pass-value-from-one-html-page-to-another-using-javascript-3c9ab62df4d fick hjälp för att skicka vidare information
   showMoreBtn.href=`./character.html?character=${user.id}`
   showMoreBtn.classList.add("house-btn");
   if (user.house === "") {
