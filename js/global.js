@@ -59,6 +59,10 @@ const list2= document.createElement("li");
 const logOut=document.createElement("button");
 logOut.innerHTML="Logga ut";
 logOut.classList.add("navigation-link");
+logOut.addEventListener("click", ()=>{
+  sessionStorage.removeItem("loggedInUser");
+  window.location.href="./index.html"
+})
 list2.appendChild(logOut)
 navigationList.appendChild(list1);
 navigationList.appendChild(list2);
