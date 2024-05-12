@@ -37,6 +37,7 @@ const showSearchBar=(data)=> {
 
   inputField.addEventListener("keyup", (e)=>{
     let input= e.target.value.toLowerCase();
+    titleOfContent.innerHTML = "Sökresultat"
     currentCharacterList=data.filter(character=>character.name.toLowerCase().includes(input))
       currentPage=1
       characterList.innerHTML="";
@@ -62,13 +63,14 @@ const showHousesButton = (data) => {
         }
         button.setAttribute("value", `${house}`);
         button.addEventListener("click", ()=>{
-        characterList.innerHTML=""
+        if(button.value===""){
+          titleOfContent.innerHTML="Alla med okänd tillhörighet"
+        }else{
+          titleOfContent.innerHTML = `Alla från ${house}`
+        }
         currentPage=1
         currentCharacterList=data.filter(specificHouse=> specificHouse.house===button.value);
-        console.log(button.value)
-        console.log(currentCharacterList)
         displayData();
-
         })
         hogwartsHouses.appendChild(button);
     });
