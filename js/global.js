@@ -16,10 +16,10 @@ const setLoggedInUser = (id) => {
   const getLoggedInUser = () => {
     return JSON.parse(sessionStorage.getItem("loggedInUser"));
   };
-
+  const navigationList=document.querySelector("#navigationList");
 //login state
 const userIsLoggedOut = ()=>{
-    const navigationList=document.querySelector("#navigationList");
+    
     navigationList.innerHTML="";
 
     const list1=document.createElement("li");
@@ -39,6 +39,24 @@ const userIsLoggedOut = ()=>{
     list2.appendChild(login);
     navigationList.appendChild(list2)
 }
+const userIsLoggedIn = ()=>{
+navigationList.innerHTML="";
+const list1=document.createElement("li");
+const myPage=document.createElement("a");
+myPage.href="./myPage.html";
+myPage.classList.add("navigation-link");
+myPage.classList.add("my-page")
+myPage.innerHTML="Min Sida";
+list1.appendChild(myPage)
+
+const list2= document.createElement("li");
+const logOut=document.createElement("button");
+logOut.innerHTML="Logga ut";
+logOut.classList.add("navigation-link");
+list2.appendChild(logOut)
+navigationList.appendChild(list1);
+navigationList.appendChild(list2);
+}
 const displayError= (message)=>{
   const errorMsg = document.querySelector("#errorMsg");
     errorMsg.innerHTML=message
@@ -48,4 +66,4 @@ const displayError= (message)=>{
 } 
 
 
-export {userIsLoggedOut, harryPotter_URL, key, database_url, getHeaders, displayError, setLoggedInUser,getLoggedInUser}
+export {userIsLoggedOut, harryPotter_URL, key, database_url, getHeaders, displayError, setLoggedInUser,getLoggedInUser, userIsLoggedIn}
