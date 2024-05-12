@@ -1,5 +1,5 @@
 //Databasfunktioner
-const harryPotter_URL= "https://hp-api.onrender.com/api/characters"
+
 const key= "TCRU4bcWoBMSCPlYvhlY7Cyv9Z9NijWGCLGFyEAYv0Bcw05NqQ"
 const database_url="https://crudapi.co.uk/api/v1/userbase"
 const getHeaders=()=>{
@@ -67,6 +67,11 @@ list2.appendChild(logOut)
 navigationList.appendChild(list1);
 navigationList.appendChild(list2);
 }
+//Help function
+//från arbeidskrav 1
+const firstBigLetter=(str)=> {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
 const displayError= (message)=>{
   const errorMsg = document.querySelector("#errorMsg");
     errorMsg.innerHTML=message
@@ -76,4 +81,4 @@ const displayError= (message)=>{
 } 
 
 
-export { harryPotter_URL, key, database_url, getHeaders, displayError, setLoggedInUser,getLoggedInUser, checkIfLoggedIn}
+export {key, database_url, getHeaders, displayError, setLoggedInUser,getLoggedInUser, checkIfLoggedIn, firstBigLetter}

@@ -1,7 +1,7 @@
-import { harryPotter_URL, checkIfLoggedIn} from "./global.js";
+import {checkIfLoggedIn} from "./global.js";
 
 checkIfLoggedIn()
-
+const harryPotter_URL= "https://hp-api.onrender.com/api/characters"
 const characterList = document.querySelector("#characterList");
 const titleOfContent = document.querySelector("#titleOfContent");
 
