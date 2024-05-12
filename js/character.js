@@ -1,4 +1,4 @@
-import { getHeaders, database_url, checkIfLoggedIn, harryPotter_URL} from "./global.js";
+import { getHeaders, database_url, checkIfLoggedIn, getLoggedInUser, firstBigLetter} from "./global.js";
 checkIfLoggedIn();
 const urlParams = new URLSearchParams(window.location.search);
 const getCharacter = urlParams.get('character');
@@ -28,7 +28,8 @@ getYear()
 const showCharacter = (character)=> {
     const characterContainer= document.querySelector("#characterContainer")
     const container = document.createElement("div");
-  container.classList.add("character-box");
+    container.classList.add("character-box");
+    container.classList.add("blur")
  
 
   const characterName = document.createElement("h3");
@@ -56,6 +57,7 @@ const showCharacter = (character)=> {
 
   const list = document.createElement("ul");
   list.classList.add("list");
+  list.classList.add("margin-left");
   
   if(character.alternate_names.length>0){
     const alternativeNames= document.createElement("li");
@@ -80,7 +82,7 @@ const showCharacter = (character)=> {
   }
  
   const gender = document.createElement("li");
-  gender.innerHTML = `Kön: ${character.gender}`;
+  gender.innerHTML = `Kön: ${firstBigLetter(character.gender)}`;
   list.appendChild(gender);
 
   const status = document.createElement("li");
@@ -100,18 +102,47 @@ const showCharacter = (character)=> {
     alive.innerHTML = `Levande: Nej`;
   }
   list.appendChild(alive);
+  const secondTextContainer= document.createElement("div");
+  secondTextContainer.classList.add("text-content");
+  secondRow.appendChild(secondTextContainer)
+
   const secondList= document.createElement("ul");
   secondList.classList.add("list");
-  secondRow.appendChild(secondList);
-
-  const age= document.createElement("li");
-  age.innerHTML=`Ålder: ${getYear()-character.yearOfBirth} år`;
-  secondList.appendChild(age);
+  secondList.classList.add("margin-left");
+  secondTextContainer.appendChild(secondList);
 
   const actor=document.createElement("li");
   actor.innerHTML=`Skådespelare: ${character.actor}`
   secondList.appendChild(actor)
 
+  const age= document.createElement("li");
+  age.innerHTML=`Ålder: ${getYear()-character.yearOfBirth} år`;
+  secondList.appendChild(age);
+  
+  const species= document.createElement("li");
+  species.innerHTML=`Art: ${firstBigLetter(character.species)}`
+  secondList.appendChild(species)
 
+  const ancestry=document.createElement("li");
+  if(character.ancestry===""){
+    ancestry.innerHTML=`Släktskap: Okänt`
+  }else{
+    ancestry.innerHTML=`Släktskap: ${firstBigLetter(character.ancestry)}`
+  }
+  secondList.appendChild(ancestry);
+
+  if(getLoggedInUser()!==null){
+    const addToFavourites= document.createElement("button");
+    addToFavourites.innerHTML=`<i class="fa-solid fa-heart"></i> Lägg till i favoriter`
+    
+    addToFavourites.classList.add("house-btn");
+    if(character.house===""){
+        addToFavourites.classList.add("unknown");
+    }else{
+        addToFavourites.classList.add(`${character.house}`);
+    }
+    
+    secondTextContainer.appendChild(addToFavourites)
+  }
   characterContainer.appendChild(container);
 }
