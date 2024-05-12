@@ -28,7 +28,6 @@ const fetchHarryData = async () => {
 
 fetchHarryData();
 const showSearchBar=(data)=> {
-  console.log(data)
   const searchBar= document.querySelector("#searchBar");
   const inputField= document.createElement("input");
   inputField.classList.add("input");
@@ -37,11 +36,12 @@ const showSearchBar=(data)=> {
 
   inputField.addEventListener("keyup", (e)=>{
     let input= e.target.value.toLowerCase();
-    titleOfContent.innerHTML = "Sökresultat"
     currentCharacterList=data.filter(character=>character.name.toLowerCase().includes(input))
-      currentPage=1
-      characterList.innerHTML="";
-      displayData()
+    /* if(input.length>0 && currentCharacterList.length===-1) */
+    titleOfContent.innerHTML = "Sökresultat"
+    currentPage=1
+    characterList.innerHTML="";
+    displayData()
   })
   searchBar.appendChild(inputField);
 }
