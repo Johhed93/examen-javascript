@@ -1,4 +1,4 @@
-import { userIsLoggedOut, getHeaders, setLoggedInUser, database_url, displayError, checkIfLoggedIn} from "./global.js";
+import { getHeaders, setLoggedInUser, database_url, displayError, checkIfLoggedIn} from "./global.js";
 
 const loginBtn= document.querySelector("#signInBtn");
 loginBtn.addEventListener("click", async(e)=>{

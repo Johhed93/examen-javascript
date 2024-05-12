@@ -1,6 +1,5 @@
 import {
   database_url,
-  userIsLoggedOut,
   getHeaders,
   displayError,
   setLoggedInUser,
