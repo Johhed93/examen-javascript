@@ -1,4 +1,4 @@
-import { getHeaders, setLoggedInUser, database_url, displayError, checkIfLoggedIn} from "./global.js";
+import { getHeaders, setLoggedInUser, database_url, displayError, checkIfLoggedIn, seePassword} from "./global.js";
 
 const loginBtn= document.querySelector("#signInBtn");
 loginBtn.addEventListener("click", async(e)=>{
@@ -51,3 +51,8 @@ const returnID= async (username)=> {
     }
 }
 checkIfLoggedIn()
+const seeInput=document.querySelector("#seeInput");
+seeInput.addEventListener("click", ()=>{
+    const password=document.querySelector("#passwordInput")
+    seePassword(password,seeInput)
+})
