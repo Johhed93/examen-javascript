@@ -76,4 +76,4 @@ const displayError= (message)=>{
 } 
 
 
-export {userIsLoggedOut, harryPotter_URL, key, database_url, getHeaders, displayError, setLoggedInUser,getLoggedInUser, userIsLoggedIn, checkIfLoggedIn}
+export { harryPotter_URL, key, database_url, getHeaders, displayError, setLoggedInUser,getLoggedInUser, checkIfLoggedIn}
