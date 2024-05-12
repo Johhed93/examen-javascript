@@ -1,4 +1,4 @@
-import { userIsLoggedOut, harryPotter_URL, userIsLoggedIn, checkIfLoggedIn} from "./global.js";
+import { harryPotter_URL, checkIfLoggedIn} from "./global.js";
 
 checkIfLoggedIn()
 
@@ -165,6 +165,7 @@ const showNextSet = () => {
   
 };
 const showCharacters = (user) => {
+  console.log(user)
   const container = document.createElement("div");
   container.classList.add("character-box");
 
@@ -220,7 +221,8 @@ const showCharacters = (user) => {
   }
   list.appendChild(alive);
 
-  const showMoreBtn = document.createElement("button");
+  const showMoreBtn = document.createElement("a");
+  showMoreBtn.href=`./character.html?character=${user.id}`
   showMoreBtn.classList.add("house-btn");
   if (user.house === "") {
     container.classList.add("unknown");
