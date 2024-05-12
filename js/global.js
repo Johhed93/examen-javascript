@@ -16,8 +16,14 @@ const setLoggedInUser = (id) => {
   const getLoggedInUser = () => {
     return JSON.parse(sessionStorage.getItem("loggedInUser"));
   };
-  const navigationList=document.querySelector("#navigationList");
-//login state
+const checkIfLoggedIn = ()=>{
+  if(getLoggedInUser() ===null){
+   return userIsLoggedOut()
+  }
+  return userIsLoggedIn()
+}
+//display-login state
+const navigationList=document.querySelector("#navigationList");
 const userIsLoggedOut = ()=>{
     
     navigationList.innerHTML="";
@@ -66,4 +72,4 @@ const displayError= (message)=>{
 } 
 
 
-export {userIsLoggedOut, harryPotter_URL, key, database_url, getHeaders, displayError, setLoggedInUser,getLoggedInUser, userIsLoggedIn}
+export {userIsLoggedOut, harryPotter_URL, key, database_url, getHeaders, displayError, setLoggedInUser,getLoggedInUser, userIsLoggedIn, checkIfLoggedIn}
