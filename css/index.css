@@ -87,57 +87,7 @@ h1 {
   gap: 10px;
   align-items: center;
 }
-.house-btn {
-  padding: 10px 30px;
-  border: none;
-  background: rgb(71, 71, 71, 0.5);
-  border-radius: 5px;
-  outline: none;
-  position: relative;
-  font-size: 1.1rem;
-  color: beige;
-}
-.house-btn::before {
-  content: "";
-  width: 4px;
-  height: 100%;
-  left: 0;
-  top: 0;
-  position: absolute;
-  border-radius: 10px 0 0 10px;
-  background: beige;
-}
-.Slytherin {
-  color: rgb(136, 255, 140);
-  position: relative;
-}
-.Slytherin::before {
-  background: rgb(136, 255, 140);
-}
-.Ravenclaw {
-  color: #94f4ff;
-}
-.Ravenclaw::before {
-  background: #94f4ff;
-}
-.Gryffindor {
-  color: #ff7e7e;
-}
-.Gryffindor::before {
-  background: #ff7e7e;
-}
-.Hufflepuff {
-  color: #fbff8d;
-}
-.Hufflepuff::before {
-  background: #fbff8d;
-}
-.unknown {
-  color: #7473ff;
-}
-.unknown::before {
-  background: #7473ff;
-}
+
 .character-container {
   display: flex;
   gap: 20px;
