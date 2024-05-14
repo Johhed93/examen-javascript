@@ -132,17 +132,67 @@ const showCharacter = (character)=> {
   secondList.appendChild(ancestry);
 
   if(getLoggedInUser()!==null){
-    const addToFavourites= document.createElement("button");
-    addToFavourites.innerHTML=`<i class="fa-solid fa-heart"></i> Lägg till i favoriter`
+    const favourites= document.createElement("button");
+    favourites.innerHTML=`<i class="fa-solid fa-heart"></i> Lägg till i favoriter`
     
-    addToFavourites.classList.add("house-btn");
+    favourites.classList.add("house-btn");
     if(character.house===""){
-        addToFavourites.classList.add("unknown");
+      favourites.classList.add("unknown");
     }else{
-        addToFavourites.classList.add(`${character.house}`);
+      favourites.classList.add(`${character.house}`);
     }
-    
-    secondTextContainer.appendChild(addToFavourites)
+    favourites.addEventListener("click", async()=>{
+      await addToFavourties(character)
+    })
+    secondTextContainer.appendChild(favourites)
   }
   characterContainer.appendChild(container);
+}
+const addToFavourties = async(character)=>{
+  let user;
+  try {
+    const res= await fetch(`${database_url}/${getLoggedInUser()}`,{
+      method: "GET",
+      headers: getHeaders()
+    })
+    if (!res.ok){
+      throw new Error("Feil i att hämta information från brukeren", res.status)
+    }
+    const data= await res.json();
+    user=data
+    user.myFavourites.push(character)
+  }catch(error){
+    console.error("feil i henting av bruker", error)
+  }
+  try {
+    const res= await fetch(`${database_url}/${getLoggedInUser()}`,{
+      method:"PUT",
+      headers: getHeaders(),
+      body: JSON.stringify(user)
+    })
+    if(!res.ok){
+      throw new Error("Add to favourites, PUT", res.status)
+    }
+    const data= await res.json();
+    console.log(data)
+
+  }catch(error){
+    console.error("Någ blev feil i att lägga till favorit till bruker", error)
+  }
+}
+const isInFavorites= async(character)=>{
+  try{
+  const res= await fetch(`${database_url}/${getLoggedInUser()}`,{
+    method:"GET",
+    headers:getHeaders()
+  })
+  if(!res.ok){
+    throw new Error("Något blev feil ved kontrollering av karaktär", res.status)
+  }
+  const data=await res.json();
+  return data.some(characters=>characters.id===character.id)
+  }
+  catch(error){
+    console.error("Feil i kontrollering av isInFavourites", error)
+  }
 }
