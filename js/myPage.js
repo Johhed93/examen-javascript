@@ -1,4 +1,4 @@
-import { getHeaders, setLoggedInUser, database_url, displayError, checkIfLoggedIn, seePassword, getLoggedInUser} from "./global.js";
+import { getHeaders, database_url, checkIfLoggedIn, seePassword, getLoggedInUser} from "./global.js";
 checkIfLoggedIn()
 const myPageContainer=document.querySelector("#myPageContainer")
 const fetchUser= async()=>{
