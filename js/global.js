@@ -88,6 +88,24 @@ const seePassword= (input,element)=>{
     element.innerHTML=`<i class="fa-solid fa-eye"></i>`
   }
 }
+const removeFromFavourties = async(character) =>{
+  let user;
+  try{
+    const res= await fetch(`${database_url}/${getLoggedInUser()}`,{
+    method:"GET",
+    headers:getHeaders()
+  })
+  if(!res.ok){
+    throw new Error("Något blev feil i henting av bruker", res.status)
+  }
+  const data= await res.json();
+  const findIndex= data.myFavourites.find(char=> char.id===character.id);
+  user=data;
+  user.myFavourites.splice(findIndex,1)
+  console.log(user)
+  }catch(error){
+    console.error("Något blev feil i henting av bruker", error)
+  }
+}
 
-
-export {database_url, getHeaders, displayError, setLoggedInUser,getLoggedInUser, checkIfLoggedIn, firstBigLetter, seePassword}
+export {database_url, getHeaders, displayError, setLoggedInUser,getLoggedInUser, checkIfLoggedIn, firstBigLetter, seePassword, removeFromFavourties}

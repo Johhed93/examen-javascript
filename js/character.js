@@ -1,4 +1,4 @@
-import { getHeaders, database_url, checkIfLoggedIn, getLoggedInUser, firstBigLetter} from "./global.js";
+import { getHeaders, database_url, checkIfLoggedIn, getLoggedInUser, firstBigLetter, removeFromFavourties} from "./global.js";
 checkIfLoggedIn();
 const urlParams = new URLSearchParams(window.location.search);
 const getCharacter = urlParams.get('character');
@@ -25,7 +25,7 @@ const getYear= ()=>{
 }
 getYear()
 
-const showCharacter = (character)=> {
+const showCharacter = async(character)=> {
     const characterContainer= document.querySelector("#characterContainer")
     const container = document.createElement("div");
     container.classList.add("character-box");
@@ -133,7 +133,7 @@ const showCharacter = (character)=> {
 
   if(getLoggedInUser()!==null){
     const favourites= document.createElement("button");
-    favourites.innerHTML=`<i class="fa-solid fa-heart"></i> Lägg till i favoriter`
+   
     
     favourites.classList.add("house-btn");
     if(character.house===""){
@@ -141,9 +141,19 @@ const showCharacter = (character)=> {
     }else{
       favourites.classList.add(`${character.house}`);
     }
+    if(await isInFavorites(character)){
+      favourites.innerHTML=`Ta bort från favoriter`
     favourites.addEventListener("click", async()=>{
-      await addToFavourties(character)
+      await removeFromFavourties(character)
+      
     })
+    }else{
+      favourites.innerHTML=`Lägg till i favoriter`
+      favourites.addEventListener("click", async()=>{
+        await addToFavourties(character)
+      })
+    }
+    
     secondTextContainer.appendChild(favourites)
   }
   characterContainer.appendChild(container);
@@ -174,7 +184,7 @@ const addToFavourties = async(character)=>{
       throw new Error("Add to favourites, PUT", res.status)
     }
     const data= await res.json();
-    console.log(data)
+    
 
   }catch(error){
     console.error("Någ blev feil i att lägga till favorit till bruker", error)
@@ -190,7 +200,7 @@ const isInFavorites= async(character)=>{
     throw new Error("Något blev feil ved kontrollering av karaktär", res.status)
   }
   const data=await res.json();
-  return data.some(characters=>characters.id===character.id)
+  return data.myFavourites.some(char=>char.id===character.id)
   }
   catch(error){
     console.error("Feil i kontrollering av isInFavourites", error)
