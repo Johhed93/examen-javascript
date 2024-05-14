@@ -1,90 +1,90 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 body {
-    background: #212121;
-    font-family: "Yanone Kaffeesatz", sans-serif;
+  background: #212121;
+  font-family: "Yanone Kaffeesatz", sans-serif;
 }
-header{
-    padding: 40px 0;
+header {
+  padding: 40px 0;
 }
-.center-content{
-    height: 100dvh;
-    display: grid;
-    place-items: center;
-    background-image: url("../assets/hogwarts-3476786_1920.png");
-    background-repeat: no-repeat;
-    background-size: cover;
+.center-content {
+  height: 100dvh;
+  display: grid;
+  place-items: center;
+  background-image: url("../assets/hogwarts-3476786_1920.png");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
-.fixed-header{
-    position: fixed;
-    width: 100%;
+.fixed-header {
+  position: fixed;
+  width: 100%;
 }
 nav {
-    display: flex;
-    width: 85%;
-    margin-inline: auto;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  width: 85%;
+  margin-inline: auto;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.logo{
-    display: flex;
-    align-items: center;
-    font-family: "Kalam", cursive;
-    font-size: 1.5rem;
-    color: #A072FF;
-    gap: 5px;
-    text-decoration: none;
+.logo {
+  display: flex;
+  align-items: center;
+  font-family: "Kalam", cursive;
+  font-size: 1.5rem;
+  color: #a072ff;
+  gap: 5px;
+  text-decoration: none;
 }
-.logo-icon{
-    font-size: 2.3rem;
+.logo-icon {
+  font-size: 2.3rem;
 }
-.navigation-list{
-    display: flex;
-    gap: 30px;
-    list-style-type: none;
+.navigation-list {
+  display: flex;
+  gap: 30px;
+  list-style-type: none;
 }
-.navigation-link{
-    width: 150px;
-    height: 50px;
-    border-radius: 10px;
-    display: grid;
-    place-items: center;
-    background: #A072FF;
-    font-size: 1.1rem;
-    text-decoration: none;
-    color: white;
+.navigation-link {
+  width: 150px;
+  height: 50px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  background: #a072ff;
+  font-size: 1.1rem;
+  text-decoration: none;
+  color: white;
 }
-.register{
-    background: #7473FF;
+.register {
+  background: #7473ff;
 }
 .my-page {
-    background:#cd82ff ;
+  background: #cd82ff;
 }
 button {
-    cursor: pointer;
-    font-family: "Yanone Kaffeesatz", sans-serif;
+  cursor: pointer;
+  font-family: "Yanone Kaffeesatz", sans-serif;
 }
 input {
-    outline: none;
-    border: none;
-    background: rgb(255, 255, 255, 0.7);
-    font-family: "Yanone Kaffeesatz", sans-serif;
-    font-size: 1.1rem;
+  outline: none;
+  border: none;
+  background: rgb(255, 255, 255, 0.7);
+  font-family: "Yanone Kaffeesatz", sans-serif;
+  font-size: 1.1rem;
 }
 .container {
-    padding: 30px;
-    margin-top: 30px;
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-    align-items: center;
-    background: radial-gradient(circle at 24.1% 68.8%, rgb(50, 50, 50) 0%, rgb(24, 24, 24) 99.4%);
-    border: 1px solid rgba(177, 177, 177, 0.4);
-    width: 85%;
-    margin-inline: auto;
-    border-radius: 30px;
+  padding: 30px;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: center;
+  background: radial-gradient(circle at 24.1% 68.8%, rgb(50, 50, 50) 0%, rgb(24, 24, 24) 99.4%);
+  border: 1px solid rgba(177, 177, 177, 0.4);
+  width: 85%;
+  margin-inline: auto;
+  border-radius: 30px;
 }

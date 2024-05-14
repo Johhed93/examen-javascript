@@ -1,221 +1,208 @@
-
 h1 {
-    font-size: 2.5rem;
-    color: white;
+  font-size: 2.5rem;
+  color: white;
 }
-.split-content{
-    display: flex;
-    gap: 40px;
-    align-items: stretch;
-    
+.split-content {
+  display: flex;
+  gap: 40px;
+  align-items: stretch;
 }
-.split-box{
-    display: flex;
-    flex-direction: column;
-    width: 50%;
-    border-radius: 15px;
-    
+.split-box {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  border-radius: 15px;
 }
-.hero-image{
-    max-width: 100%;
-    object-fit: cover;
-    display: block;
-    border-radius: 15px;
+.hero-image {
+  max-width: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 15px;
 }
-.text-box{
-    padding: 40px;
-    gap: 20px;
-    background-color: rgba(49, 49, 49, 0.6);
-    color: white;
-    justify-content: center;
-    align-items: center;
-    position: relative;
+.text-box {
+  padding: 40px;
+  gap: 20px;
+  background-color: rgba(49, 49, 49, 0.6);
+  color: white;
+  justify-content: center;
+  align-items: center;
+  position: relative;
 }
-.text-box::before{
-    content: "";
-    position: absolute;
-    height: 95%;
-    width: 10px;
-    background: rgba(193, 162, 255, 0.66);
-    left: 0;
-    top: 2.5%;
-    border-radius: 10px;
+.text-box::before {
+  content: "";
+  position: absolute;
+  height: 95%;
+  width: 10px;
+  background: rgba(193, 162, 255, 0.66);
+  left: 0;
+  top: 2.5%;
+  border-radius: 10px;
 }
-.hero-paragraf{
-    font-size: 1.2rem;
-    line-height: 1.5;
+.hero-paragraf {
+  font-size: 1.2rem;
+  line-height: 1.5;
 }
-.devide-content{
-    height: 3px;
-    background: rgb(255, 255, 255, 0.35);
-    width: 100%;
-    border-radius: 3px;
+.devide-content {
+  height: 3px;
+  background: rgb(255, 255, 255, 0.35);
+  width: 100%;
+  border-radius: 3px;
 }
 .big-button {
-    padding: 20px 0;
-    border: none;
-    outline: none;
-    background: #7473FF;
-    border-radius: 10px;
-    color: white;
-    width: 150px;
-    font-size: 1.1rem;
+  padding: 20px 0;
+  border: none;
+  outline: none;
+  background: #7473ff;
+  border-radius: 10px;
+  color: white;
+  width: 150px;
+  font-size: 1.1rem;
 }
-.search-container{
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    width: 100%;
-    align-items: center;
+.search-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  align-items: center;
 }
-.first-search-row{
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    
+.first-search-row {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
-.column-box{
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    gap: 10px;
-    color: rgb(207, 134, 255);
+.column-box {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+  color: rgb(207, 134, 255);
 }
 .input {
-    padding: 10px ;
-    border-radius: 10px;   
-    width: 348px;
+  padding: 10px;
+  border-radius: 10px;
+  width: 348px;
 }
 .button-container {
-    display: flex;
-    gap: 10px;
-    align-items: center;
+  display: flex;
+  gap: 10px;
+  align-items: center;
 }
 .house-btn {
-    padding: 10px 30px;
-    border: none;
-    background: rgb(71, 71, 71, 0.5);
-    border-radius: 5px;
-    outline: none;
-    position: relative;
-    font-size: 1.1rem;
-    color: beige;
-    
+  padding: 10px 30px;
+  border: none;
+  background: rgb(71, 71, 71, 0.5);
+  border-radius: 5px;
+  outline: none;
+  position: relative;
+  font-size: 1.1rem;
+  color: beige;
 }
-.house-btn::before{
-    content:"";
-    width: 4px;
-    height: 100%;
-    left: 0;
-    top: 0;
-    position: absolute;
-    border-radius: 10px 0 0 10px;
-    background: beige;
-    
-
+.house-btn::before {
+  content: "";
+  width: 4px;
+  height: 100%;
+  left: 0;
+  top: 0;
+  position: absolute;
+  border-radius: 10px 0 0 10px;
+  background: beige;
 }
-.Slytherin{
-    color: rgb(136, 255, 140);
-    position: relative;
-    
+.Slytherin {
+  color: rgb(136, 255, 140);
+  position: relative;
 }
-.Slytherin::before{
+.Slytherin::before {
   background: rgb(136, 255, 140);
 }
 .Ravenclaw {
-    color: #94F4FF;
-    
+  color: #94f4ff;
 }
-.Ravenclaw::before{
-  background: #94F4FF;
-  
+.Ravenclaw::before {
+  background: #94f4ff;
 }
-.Gryffindor{
-    color: #FF7E7E;
-    
+.Gryffindor {
+  color: #ff7e7e;
 }
-.Gryffindor::before{
-  background: #FF7E7E;
+.Gryffindor::before {
+  background: #ff7e7e;
 }
-.Hufflepuff{
- color: #FBFF8D;
- 
+.Hufflepuff {
+  color: #fbff8d;
 }
-.Hufflepuff::before{
-    background: #FBFF8D;
+.Hufflepuff::before {
+  background: #fbff8d;
 }
 .unknown {
-    color: #7473FF;
-    
+  color: #7473ff;
 }
-.unknown::before{
-    background: #7473FF;
+.unknown::before {
+  background: #7473ff;
 }
-.character-container{
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
+.character-container {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
 }
-.character-box{
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding: 10px 30px 30px 30px;
-    align-items: center;
-    color: white;
-    background-color: rgb(65, 65, 65, 0.65);
-    border-radius: 15px;
-    position: relative;
+.character-box {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px 30px 30px 30px;
+  align-items: center;
+  color: white;
+  background-color: rgb(65, 65, 65, 0.65);
+  border-radius: 15px;
+  position: relative;
 }
-.character-box::before{
+.character-box::before {
   content: "";
-  position:absolute;
+  position: absolute;
   left: 0;
   top: 5%;
   width: 8px;
   height: 90%;
- 
+
   border-radius: 10px;
 }
-.row-box{
-    display: flex;
-    gap: 10px;
+.row-box {
+  display: flex;
+  gap: 10px;
 }
-.text-content{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+.text-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
-.list{
-    display: flex;
-    flex-direction: column;
-    list-style-type: none;
-    gap: 10px;
-    padding-top: 5px;
-    font-size: 1.1rem;
+.list {
+  display: flex;
+  flex-direction: column;
+  list-style-type: none;
+  gap: 10px;
+  padding-top: 5px;
+  font-size: 1.1rem;
 }
-.margin-left{
-    margin-left: 20px;
+.margin-left {
+  margin-left: 20px;
 }
-.blur{
-    backdrop-filter: blur(5px);
+.blur {
+  backdrop-filter: blur(5px);
 }
-.character-image{
-    height: 276px;
-    width: 193px;
-    border-radius: 10px;
-    object-fit: cover;
+.character-image {
+  height: 276px;
+  width: 193px;
+  border-radius: 10px;
+  object-fit: cover;
 }
-.read-more{
-    width: 150px;
-    padding: 15px 0;
-    border-radius: 15px;
-    outline: none;
-    border: none;
-    background: #FF7E7E;
+.read-more {
+  width: 150px;
+  padding: 15px 0;
+  border-radius: 15px;
+  outline: none;
+  border: none;
+  background: #ff7e7e;
 }
-.character-name{
-    font-size: 1.7rem;
+.character-name {
+  font-size: 1.7rem;
 }

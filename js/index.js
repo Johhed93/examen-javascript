@@ -1,7 +1,7 @@
-import {checkIfLoggedIn, firstBigLetter} from "./global.js";
+import { checkIfLoggedIn, firstBigLetter } from "./global.js";
 
-checkIfLoggedIn()
-const harryPotter_URL= "https://hp-api.onrender.com/api/characters"
+checkIfLoggedIn();
+const harryPotter_URL = "https://hp-api.onrender.com/api/characters";
 const characterList = document.querySelector("#characterList");
 const titleOfContent = document.querySelector("#titleOfContent");
 
@@ -17,63 +17,60 @@ const fetchHarryData = async () => {
       throw new Error("Något blev fel hos databasen i fetchHarryData", res.status);
     }
     const data = await res.json();
-    showHousesButton(data)
+    showHousesButton(data);
     showStatusButton(data);
-    showSearchBar(data)
-    
+    showSearchBar(data);
   } catch (error) {
     console.error("Något blev fel med fetchning i fetchHarryData", error);
   }
 };
 
 fetchHarryData();
-const showSearchBar=(data)=> {
-  const searchBar= document.querySelector("#searchBar");
-  const inputField= document.createElement("input");
+const showSearchBar = (data) => {
+  const searchBar = document.querySelector("#searchBar");
+  const inputField = document.createElement("input");
   inputField.classList.add("input");
-  inputField.placeholder="Harry Potter";
-  
+  inputField.placeholder = "Harry Potter";
 
-  inputField.addEventListener("keyup", (e)=>{
-    let input= e.target.value.toLowerCase();
-    currentCharacterList=data.filter(character=>character.name.toLowerCase().includes(input))
+  inputField.addEventListener("keyup", (e) => {
+    let input = e.target.value.toLowerCase();
+    currentCharacterList = data.filter((character) => character.name.toLowerCase().includes(input));
     /* if(input.length>0 && currentCharacterList.length===-1) */
-    titleOfContent.innerHTML = "Sökresultat"
-    currentPage=1
-    characterList.innerHTML="";
-    displayData()
-  })
+    titleOfContent.innerHTML = "Sökresultat";
+    currentPage = 1;
+    characterList.innerHTML = "";
+    displayData();
+  });
   searchBar.appendChild(inputField);
-}
+};
 
 const showHousesButton = (data) => {
-    const houses = Array.from(new Set(data.map((student) => student.house)));
-    const hogwartsHouses = document.querySelector("#hogwartsHouses");
-    houses.forEach((house) => {
-        const button = document.createElement("button");
+  const houses = Array.from(new Set(data.map((student) => student.house)));
+  const hogwartsHouses = document.querySelector("#hogwartsHouses");
+  houses.forEach((house) => {
+    const button = document.createElement("button");
 
-        button.classList.add("house-btn");
-        if (house === "") {
-          button.classList.add("unknown");
-          button.innerHTML = "Inget hus";
-          
-        } else {
-          button.classList.add(`${house}`);
-          button.innerHTML = house;
-        }
-        button.setAttribute("value", `${house}`);
-        button.addEventListener("click", ()=>{
-        if(button.value===""){
-          titleOfContent.innerHTML="Alla med okänd tillhörighet"
-        }else{
-          titleOfContent.innerHTML = `Alla från ${house}`
-        }
-        currentPage=1
-        currentCharacterList=data.filter(specificHouse=> specificHouse.house===button.value);
-        displayData();
-        })
-        hogwartsHouses.appendChild(button);
+    button.classList.add("house-btn");
+    if (house === "") {
+      button.classList.add("unknown");
+      button.innerHTML = "Inget hus";
+    } else {
+      button.classList.add(`${house}`);
+      button.innerHTML = house;
+    }
+    button.setAttribute("value", `${house}`);
+    button.addEventListener("click", () => {
+      if (button.value === "") {
+        titleOfContent.innerHTML = "Alla med okänd tillhörighet";
+      } else {
+        titleOfContent.innerHTML = `Alla från ${house}`;
+      }
+      currentPage = 1;
+      currentCharacterList = data.filter((specificHouse) => specificHouse.house === button.value);
+      displayData();
     });
+    hogwartsHouses.appendChild(button);
+  });
 };
 const showStatusButton = (data) => {
   const statusClass = document.querySelector("#statusClass");
@@ -84,8 +81,8 @@ const showStatusButton = (data) => {
     titleOfContent.innerHTML = "Alla elever på hogwarts";
     characterList.innerHTML = "";
     currentCharacterList = data.filter((student) => student.hogwartsStudent === true);
-    currentPage=1
-    displayData()
+    currentPage = 1;
+    displayData();
   });
   statusClass.appendChild(student);
 
@@ -93,11 +90,11 @@ const showStatusButton = (data) => {
   teacher.classList.add("house-btn");
   teacher.innerHTML = "Lärare";
   teacher.addEventListener("click", () => {
-    currentPage=1
+    currentPage = 1;
     currentCharacterList = data.filter((teacher) => teacher.hogwartsStaff === true);
     characterList.innerHTML = "";
     titleOfContent.innerHTML = "Alla anställda på hogwarts";
-    displayData()
+    displayData();
   });
   statusClass.appendChild(teacher);
 
@@ -105,64 +102,64 @@ const showStatusButton = (data) => {
   neither.classList.add("house-btn");
   neither.innerHTML = "Inget av det";
   neither.addEventListener("click", () => {
-    currentPage=1
+    currentPage = 1;
     characterList.innerHTML = "";
-    currentCharacterList = data.filter((noth) => noth.hogwartsStaff === false && noth.hogwartsStudent === false);
+    currentCharacterList = data.filter(
+      (noth) => noth.hogwartsStaff === false && noth.hogwartsStudent === false
+    );
     titleOfContent.innerHTML = "De som inte jobbar eller är elever på hogwarts";
     displayData();
   });
   statusClass.appendChild(neither);
 };
 
-// Fått hjälp av chatgpt med displayData() prompt "här har jag alla harry potter karaktärer som är teacher t:ex jag vill bara visa fram 12 åt gången och 
-// när jag trycker på en knapp längst ner på dokumentet (inte skapat än) så ska du kunna gå igenom nästa 12 så man inte visar fram 
+// Fått hjälp av chatgpt med displayData() prompt "här har jag alla harry potter karaktärer som är teacher t:ex jag vill bara visa fram 12 åt gången och
+// när jag trycker på en knapp längst ner på dokumentet (inte skapat än) så ska du kunna gå igenom nästa 12 så man inte visar fram
 // 100 objekter på en gång. hur gör jag det?"
 const displayData = () => {
   const startIndex = (currentPage - 1) * charactersPerPage;
-  const endIndex= startIndex+charactersPerPage;
-  const charactersToShow= currentCharacterList.slice(startIndex, endIndex)
-  characterList.innerHTML="";
+  const endIndex = startIndex + charactersPerPage;
+  const charactersToShow = currentCharacterList.slice(startIndex, endIndex);
+  characterList.innerHTML = "";
   showNextSet();
-  charactersToShow.forEach(character=>{
-    showCharacters(character)
-  })
+  charactersToShow.forEach((character) => {
+    showCharacters(character);
+  });
 };
 
 const showNextSet = () => {
   const showNextContainer = document.querySelector("#showNextContainer");
-  showNextContainer.innerHTML=""
-  if(currentCharacterList.length<12){
-    return
+  showNextContainer.innerHTML = "";
+  if (currentCharacterList.length < 12) {
+    return;
   }
-  if(currentPage>1){
+  if (currentPage > 1) {
     const previousButton = document.createElement("button");
     previousButton.innerHTML = `Visa föregående sida`;
     previousButton.classList.add("big-button");
-    previousButton.addEventListener("click", ()=>{
-            currentPage--;
-            displayData();
-    })
+    previousButton.addEventListener("click", () => {
+      currentPage--;
+      displayData();
+    });
     showNextContainer.appendChild(previousButton);
   }
-  const showCurrentPage= document.createElement("p");
-  showCurrentPage.innerHTML=`${currentPage} / ${Math.ceil(currentCharacterList.length/charactersPerPage)}`
+  const showCurrentPage = document.createElement("p");
+  showCurrentPage.innerHTML = `${currentPage} / ${Math.ceil(
+    currentCharacterList.length / charactersPerPage
+  )}`;
   showNextContainer.appendChild(showCurrentPage);
 
-  if(currentCharacterList.length/currentPage>charactersPerPage){
-  const nextButton = document.createElement("button");
-  nextButton.innerHTML = `Visa nästa sida`;
-  nextButton.classList.add("big-button");
-  nextButton.addEventListener("click", ()=>{
-    currentPage++;
+  if (currentCharacterList.length / currentPage > charactersPerPage) {
+    const nextButton = document.createElement("button");
+    nextButton.innerHTML = `Visa nästa sida`;
+    nextButton.classList.add("big-button");
+    nextButton.addEventListener("click", () => {
+      currentPage++;
       displayData();
-      console.log(currentCharacterList)
-    
-  });
-  showNextContainer.appendChild(nextButton);
-}
-
-  
-  
+      console.log(currentCharacterList);
+    });
+    showNextContainer.appendChild(nextButton);
+  }
 };
 const showCharacters = (user) => {
   const container = document.createElement("div");
@@ -223,15 +220,15 @@ const showCharacters = (user) => {
   const showMoreBtn = document.createElement("a");
 
   //https://medium.com/@cyberbotmachines/how-to-pass-value-from-one-html-page-to-another-using-javascript-3c9ab62df4d fick hjälp för att skicka vidare information
-  showMoreBtn.href=`./character.html?character=${user.id}`
+  showMoreBtn.href = `./character.html?character=${user.id}`;
   showMoreBtn.classList.add("house-btn");
   if (user.house === "") {
     container.classList.add("unknown");
     showMoreBtn.classList.add("unknown");
-    house.innerHTML=`Hus: Okänt`
+    house.innerHTML = `Hus: Okänt`;
   } else {
     showMoreBtn.classList.add(`${user.house}`);
-    container.classList.add(`${user.house}`)
+    container.classList.add(`${user.house}`);
   }
   showMoreBtn.innerHTML = `Läs mer`;
   textContainer.appendChild(showMoreBtn);
