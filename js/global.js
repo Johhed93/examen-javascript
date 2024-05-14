@@ -102,10 +102,22 @@ const removeFromFavourties = async(character) =>{
   const findIndex= data.myFavourites.find(char=> char.id===character.id);
   user=data;
   user.myFavourites.splice(findIndex,1)
-  console.log(user)
   }catch(error){
     console.error("Något blev feil i henting av bruker", error)
   }
+  try {
+  const res= await fetch(`${database_url}/${getLoggedInUser()}`,{
+    method:"PUT",
+    headers: getHeaders(),
+    body:JSON.stringify(user)
+  })
+  if(!res.ok){
+    throw new Error("Feil i put favorit", res.status)
+  }
+  }catch(error){
+    console.error("Feil i put removeFromFavourites", error)
+  }
+
 }
 
 export {database_url, getHeaders, displayError, setLoggedInUser,getLoggedInUser, checkIfLoggedIn, firstBigLetter, seePassword, removeFromFavourties}
