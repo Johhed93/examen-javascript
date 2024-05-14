@@ -29,7 +29,10 @@ const inputToParagrph = (input, container, user)=>{
     input.remove();
 }
 const showUser= (user)=>{
+    const firstRow= document.createElement("div");
+    firstRow.classList.add("first-row");
     const profileContainer= document.createElement("div");
+    firstRow.appendChild(profileContainer)
     profileContainer.classList.add("profile-container");
     const headline= document.createElement("h1");
     headline.innerHTML="Min profil";
@@ -106,7 +109,96 @@ const showUser= (user)=>{
     passwordBox.appendChild(editpassword)
     profileContainer.appendChild(passwordBox)
     
-    
+    const userActions= document.createElement("div");
+    userActions.classList.add("profile-container");
+    firstRow.appendChild(userActions)
+    const userTitle= document.createElement("h2");
+    userTitle.style.fontSize="2rem";
+    userTitle.style.width="289px"
+    userTitle.innerHTML=`Användarcenter`
+    userActions.appendChild(userTitle)
 
-    myPageContainer.appendChild(profileContainer)
+    const signOut= document.createElement("button");
+    signOut.classList.add("house-btn");
+    signOut.innerHTML="Logga ut";
+    signOut.classList.add("unknown")
+    userActions.appendChild(signOut);
+
+    const deleteAccount=document.createElement("button");
+    deleteAccount.classList.add("house-btn");
+    deleteAccount.classList.add("Gryffindor");
+    deleteAccount.innerHTML=`Radera konto`;
+    userActions.appendChild(deleteAccount)
+
+    myPageContainer.appendChild(firstRow)
+
+    const myFavouritesList= document.createElement("div");
+    myFavouritesList.classList.add("profile-container");
+    myFavouritesList.style.width="100%";
+    const favouritesHeadline=document.createElement("h2");
+    favouritesHeadline.style.fontSize="2rem"
+    favouritesHeadline.innerHTML=`Mina favoriter`;
+    myFavouritesList.appendChild(favouritesHeadline);
+    myPageContainer.appendChild(myFavouritesList);
+    
+    const list= document.createElement("ul");
+    list.classList.add("list");
+    myFavouritesList.appendChild(list)
+
+    if(user.myFavourites.length===0){
+    const li=document.createElement("li");
+    const container=document.createElement("div");
+    container.classList.add("list-element");
+    const message= document.createElement("p");
+    message.innerHTML="Det ser ut som du inte har hittat någon favorit än"
+    const link= document.createElement("a");
+    link.classList.add("link")
+    link.href="./index.html";
+    link.innerHTML=`Hitta favoriter`
+    list.appendChild(li)
+    li.appendChild(container);
+    container.appendChild(message);
+    container.appendChild(link)
+    }else{
+        user.myFavourites.forEach(char=>{
+            const li=document.createElement("li");
+           
+            const container= document.createElement("div");
+            container.classList.add("list-element");
+            
+            li.appendChild(container)
+            const picture= document.createElement("img");
+            picture.classList.add("picture");
+            picture.src=char.image;
+            
+            const name=document.createElement("p");
+            name.innerHTML=char.name;
+
+            const house=document.createElement("p");
+            if(char.house===""){
+                house.innerHTML="Hus okänt"
+                house.classList.add("unknown")
+            }else{
+                house.innerHTML=`${char.house}`;
+                house.classList.add(`${char.house}`)
+            }
+            const btnContainer= document.createElement("div");
+            btnContainer.classList.add("btn-container");
+            const seeMore= document.createElement("a");
+            seeMore.href=`./character.html?character=${char.id}`;
+            seeMore.innerHTML="Läs mer";
+            seeMore.classList.add("link")
+            btnContainer.appendChild(seeMore);
+            const remove= document.createElement("button");
+            remove.classList.add("button");
+            remove.innerHTML="Ta bort";
+            btnContainer.appendChild(remove)
+            container.appendChild(picture)
+            container.appendChild(name)
+            container.appendChild(house)
+            container.appendChild(btnContainer)
+            list.appendChild(li)
+        })
+    }
+
 }
