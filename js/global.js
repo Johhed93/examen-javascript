@@ -38,6 +38,22 @@ const removeFromFavourties = async (character) => {
     console.error("Feil i put removeFromFavourites", error);
   }
 };
+const verifyUsername = async (username) => {
+  try {
+    const res = await fetch(database_url, {
+      method: "GET",
+      headers: getHeaders(),
+    });
+    if (!res.ok) {
+      displayError("Något blev fel försök igen");
+      throw new Error("Något blev fel i databasen för verifiering av username", res.status);
+    }
+    const data = await res.json();
+    return data.items.some((user) => user.username === username);
+  } catch (error) {
+    console.error("Något blev fel i verifiering av databasen", error);
+  }
+};
 //Login funktioner
 const setLoggedInUser = (id) => {
   return sessionStorage.setItem("loggedInUser", JSON.stringify(id));
@@ -127,4 +143,5 @@ export {
   firstBigLetter,
   seePassword,
   removeFromFavourties,
+  verifyUsername
 };
