@@ -5,19 +5,18 @@ import {
   setLoggedInUser,
   checkIfLoggedIn,
   seePassword,
-  verifyUsername
+  verifyUsername,
 } from "./global.js";
-
 
 checkIfLoggedIn();
 //hjälp av chatgpt för att konvertera till riktig tidszon prompt: "Hur konverterar jag new Date() till norsk tidzon"
 //Anledning servern hanterar new Date() på sin tidzon och därför lagrades datan 2 timmar bak.
-const convertTimezone=(date)=> {
+const convertTimezone = (date) => {
   const today = new Date(date);
   const timeZoneOffset = today.getTimezoneOffset();
   today.setMinutes(today.getMinutes() - timeZoneOffset);
   return today;
-}
+};
 const registerUser = async () => {
   const fName = document.querySelector("#fNameInput").value;
   const lName = document.querySelector("#lNameInput").value;
@@ -28,7 +27,7 @@ const registerUser = async () => {
   if (password !== repeatPassword) {
     return displayError("Passordet matchar inte");
   }
-  const date= new Date()
+  const date = new Date();
   const user = [
     {
       name: fName,
@@ -38,9 +37,9 @@ const registerUser = async () => {
       password: password,
       registerDate: convertTimezone(date),
       status: "user",
-    }
+    },
   ];
-  
+
   try {
     if (await verifyUsername(username)) {
       return displayError("Användarnamnet finns redan");
@@ -83,13 +82,13 @@ const succesfullRegistration = (user) => {
     window.location.href = "./index.html";
   }, 3000);
 };
-const seeFirstPassword= document.querySelector("#seeFirstPassword");
-seeFirstPassword.addEventListener("click", ()=> {
-  const password = document.querySelector("#passwordInput")
-  seePassword(password,seeFirstPassword)
-})
-const seeRepetedPassword= document.querySelector("#seeRepetedPassword");
-seeRepetedPassword.addEventListener("click", ()=>{
-  const repeatPassword = document.querySelector("#repeatPasswordInput")
-  seePassword(repeatPassword,seeRepetedPassword)
-})
+const seeFirstPassword = document.querySelector("#seeFirstPassword");
+seeFirstPassword.addEventListener("click", () => {
+  const password = document.querySelector("#passwordInput");
+  seePassword(password, seeFirstPassword);
+});
+const seeRepetedPassword = document.querySelector("#seeRepetedPassword");
+seeRepetedPassword.addEventListener("click", () => {
+  const repeatPassword = document.querySelector("#repeatPasswordInput");
+  seePassword(repeatPassword, seeRepetedPassword);
+});
