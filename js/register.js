@@ -27,6 +27,9 @@ const registerUser = async () => {
   if (password !== repeatPassword) {
     return displayError("Passordet matchar inte");
   }
+  if(!fName || !lName || !username|| !password){
+    return displayError("Du måste fylla i alla fält")
+  } 
   const date = new Date();
   const user = [
     {
