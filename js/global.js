@@ -19,9 +19,10 @@ const removeFromFavourties = async (character) => {
       throw new Error("Något blev feil i henting av bruker", res.status);
     }
     const data = await res.json();
-    const findIndex = data.myFavourites.find((char) => char.id === character.id);
+    const findIndex = data.myFavourites.findIndex((char) => char.id === character.id);
     user = data;
     user.myFavourites.splice(findIndex, 1);
+    
   } catch (error) {
     console.error("Något blev feil i henting av bruker", error);
   }
