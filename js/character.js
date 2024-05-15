@@ -10,6 +10,7 @@ checkIfLoggedIn();
 const urlParams = new URLSearchParams(window.location.search);
 const getCharacter = urlParams.get("character");
 const character_url = "https://hp-api.onrender.com/api/character/";
+const characterContainer = document.querySelector("#characterContainer");
 const fetchData = async () => {
   try {
     const res = await fetch(`${character_url}${getCharacter}`);
@@ -17,7 +18,7 @@ const fetchData = async () => {
       throw new Error(res.status);
     }
     const data = await res.json();
-    console.log(data[0]);
+    characterContainer.innerHTML=""
     showCharacter(data[0]);
   } catch (error) {
     console.error(error);
@@ -31,7 +32,7 @@ const getYear = () => {
 getYear();
 
 const showCharacter = async (character) => {
-  const characterContainer = document.querySelector("#characterContainer");
+  
   const container = document.createElement("div");
   container.classList.add("character-box");
   container.classList.add("blur");
@@ -148,11 +149,13 @@ const showCharacter = async (character) => {
       favourites.innerHTML = `Ta bort från favoriter`;
       favourites.addEventListener("click", async () => {
         await removeFromFavourties(character);
+        await fetchData()
       });
     } else {
       favourites.innerHTML = `Lägg till i favoriter`;
       favourites.addEventListener("click", async () => {
         await addToFavourties(character);
+        await fetchData()
       });
     }
 
