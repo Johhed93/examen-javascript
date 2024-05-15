@@ -2,12 +2,10 @@ import {
   getHeaders,
   database_url,
   checkIfLoggedIn,
-  seePassword,
-  getLoggedInUser,
-  removeFromFavourties,
-  verifyUsername,
+  getLoggedInUser
 } from "./global.js";
 checkIfLoggedIn();
+
 const fetchData = async () => {
   const res = await fetch(database_url, {
     method: "GET",
