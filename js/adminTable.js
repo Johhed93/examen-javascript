@@ -49,12 +49,22 @@ const monthlyRegistred = (data) => {
 };
 const userContainer = document.querySelector("#userContainer");
 const myPageContainer = document.querySelector("#myPageContainer");
+const headline=document.querySelector("#headline")
 const showData = (data) => {
   const firstRow = document.createElement("div");
   firstRow.classList.add("first-row");
 
   const todayContainer = document.createElement("div");
   todayContainer.classList.add("box");
+  todayContainer.addEventListener("click", ()=>{
+    userContainer.innerHTML="";
+    headline.innerHTML="Alla som registrerat idag";
+    const newMembers= registredToday(data);
+    newMembers.forEach(member=>{
+        showUsers(member)
+    })
+  })
+
   const todayIcon = document.createElement("span");
   todayIcon.classList.add("icon");
   todayIcon.innerHTML = `<i class="fa-solid fa-user-plus"></i>`;
@@ -68,6 +78,14 @@ const showData = (data) => {
 
   const monthContainer = document.createElement("div");
   monthContainer.classList.add("box");
+  monthContainer.addEventListener("click", ()=>{
+    userContainer.innerHTML="";
+    headline.innerHTML=`Alla som registrerat sig denna månaden`;
+    const newMembers=monthlyRegistred(data);
+    newMembers.forEach(member=>{
+        showUsers(member)
+    })
+  })
   const monthIcon = document.createElement("span");
   monthIcon.classList.add("icon");
   monthIcon.innerHTML = `<i class="fa-regular fa-calendar-days"></i>`;
@@ -80,6 +98,13 @@ const showData = (data) => {
 
   const allContainer = document.createElement("div");
   allContainer.classList.add("box");
+  allContainer.addEventListener("click", ()=>{
+    headline.innerHTML="Alla medlemmar"
+    userContainer.innerHTML="";
+    data.forEach(user=>{
+        showUsers(user)
+    })
+  })
   const allIcon = document.createElement("span");
   allIcon.classList.add("icon");
   allIcon.innerHTML = `<i class="fa-solid fa-users"></i>`;
