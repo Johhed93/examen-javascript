@@ -8,7 +8,6 @@
   color: rgb(207, 134, 255);
   text-align: center;
   width: max-content;
-  
 }
 .edit-user-box {
   display: flex;
@@ -36,69 +35,66 @@
   color: white;
   background: rgb(65, 65, 65, 1);
 }
-.flex-container{
-    display: flex;
-    margin-top: 100px;
-    gap: 30px;
-    width: fit-content;
-    justify-content: center;
-    flex-direction: column;
-    margin-inline: auto;
-    align-items: center;
-    position: relative;
+.flex-container {
+  display: flex;
+  margin-top: 100px;
+  gap: 30px;
+  width: fit-content;
+  justify-content: center;
+  flex-direction: column;
+  margin-inline: auto;
+  align-items: center;
+  position: relative;
 }
-.list{
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    list-style-type: none;
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  list-style-type: none;
 }
-.list-element{
-    display: flex;
-    padding: 10px;
-    background-color: rgb(65, 65, 65, 0.75);
-    justify-content: space-between;
-    color: white;
-    border-radius: 5px;
-    font-size: 1.1rem;
-    align-items: center;
-    gap: 5px;
+.list-element {
+  display: flex;
+  padding: 10px;
+  background-color: rgb(65, 65, 65, 0.75);
+  justify-content: space-between;
+  color: white;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  align-items: center;
+  gap: 5px;
 }
 .link {
-    padding: 10px 20px;
-    text-decoration: none;
-    border-radius: 5px;
-    color: white;
-    background-color: #a072ff;
-    margin-left: 10px;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  color: white;
+  background-color: #a072ff;
+  margin-left: 10px;
 }
 
-.picture{
-    height: 155px;
-    width: 105px;
-    border-radius: 10px;
-    object-fit: cover;
+.picture {
+  height: 155px;
+  width: 105px;
+  border-radius: 10px;
+  object-fit: cover;
 }
-.first-row{
-    display: flex;
-    gap: 20px;
+.first-row {
+  display: flex;
+  gap: 20px;
 }
-.btn-container{
-    display: flex;
-    gap: 5px;
-}
+
 .button {
-    border: none;
-    outline: none;
-    padding: 10px 20px;
-    text-decoration: none;
-    border-radius: 5px;
-    color: #a072ff;
-    background-color: rgb(73, 73, 73);
-    margin-left: 10px;
-    font-size: 1.1rem;
+  border: none;
+  outline: none;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  color: #a072ff;
+  background-color: rgb(73, 73, 73);
+  margin-left: 10px;
+  font-size: 1.1rem;
 }
-.position-absolute{
+.position-absolute {
   position: absolute;
   width: 100%;
   min-height: 65%;
@@ -107,12 +103,12 @@
   align-items: center;
   top: 0;
 }
-.inputs{
+.inputs {
   padding: 8px 10px;
   border-radius: 5px;
   width: 300px;
 }
-.x-btn{
+.x-btn {
   position: absolute;
   right: 10px;
   top: 10px;
