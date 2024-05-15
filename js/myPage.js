@@ -1,4 +1,4 @@
-import { getHeaders, database_url, checkIfLoggedIn, seePassword, getLoggedInUser} from "./global.js";
+import { getHeaders, database_url, checkIfLoggedIn, seePassword, getLoggedInUser, removeFromFavourties} from "./global.js";
 checkIfLoggedIn()
 const myPageContainer=document.querySelector("#myPageContainer")
 const fetchUser= async()=>{
@@ -8,14 +8,14 @@ const fetchUser= async()=>{
     headers:getHeaders()
     })
     const data=await res.json();
-    console.log(data)
+    myPageContainer.innerHTML=""
     showUser(data)
     }catch(error){
         console.error("Feil i henting av bruker", error)
     }
 }
 fetchUser()
-const paragraphToInput =(p, container, user)=>{
+/* const paragraphToInput =(p, container, user)=>{
     let input=document.createElement("input");
     input.classList.add("edit-input");
     input.value=user.name;
@@ -27,7 +27,7 @@ const inputToParagrph = (input, container, user)=>{
     p.innerHTML=user.name;
     container.appendChild(p);
     input.remove();
-}
+} */
 const showUser= (user)=>{
     const firstRow= document.createElement("div");
     firstRow.classList.add("first-row");
@@ -69,9 +69,7 @@ const showUser= (user)=>{
     const editName= document.createElement("button");
     editName.innerHTML=`<i class="fa-solid fa-pen"></i>`
     editName.classList.add("edit-btn")
-    editName.addEventListener("click", ()=>{
-        paragraphToInput(nameText, nameTextContainer, user)
-    })
+    
     nameBox.appendChild(editName)
     profileContainer.appendChild(nameBox)
 
@@ -192,6 +190,10 @@ const showUser= (user)=>{
             const remove= document.createElement("button");
             remove.classList.add("button");
             remove.innerHTML="Ta bort";
+            remove.addEventListener("click", async()=>{
+            await removeFromFavourties(char)
+            await fetchUser()
+            })
             btnContainer.appendChild(remove)
             container.appendChild(picture)
             container.appendChild(name)
