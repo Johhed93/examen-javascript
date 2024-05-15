@@ -14,10 +14,7 @@ checkIfLoggedIn();
 //Anledning servern hanterar new Date() på sin tidzon och därför lagrades datan 2 timmar bak.
 const convertTimezone=(date)=> {
   const today = new Date(date);
-
-  
-  const timeZoneOffset = datum.getTimezoneOffset();
-
+  const timeZoneOffset = today.getTimezoneOffset();
   today.setMinutes(today.getMinutes() - timeZoneOffset);
   return today;
 }
@@ -40,6 +37,7 @@ const registerUser = async () => {
       username: username,
       password: password,
       registerDate: convertTimezone(date),
+      status: "user",
     }
   ];
   
