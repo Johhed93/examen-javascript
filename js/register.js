@@ -10,6 +10,17 @@ import {
 
 
 checkIfLoggedIn();
+//hjälp av chatgpt för att konvertera till riktig tidszon prompt: "Hur konverterar jag new Date() till norsk tidzon"
+//Anledning servern hanterar new Date() på sin tidzon och därför lagrades datan 2 timmar bak.
+const convertTimezone=(date)=> {
+  const today = new Date(date);
+
+  
+  const timeZoneOffset = datum.getTimezoneOffset();
+
+  today.setMinutes(today.getMinutes() - timeZoneOffset);
+  return today;
+}
 const registerUser = async () => {
   const fName = document.querySelector("#fNameInput").value;
   const lName = document.querySelector("#lNameInput").value;
@@ -20,6 +31,7 @@ const registerUser = async () => {
   if (password !== repeatPassword) {
     return displayError("Passordet matchar inte");
   }
+  const date= new Date()
   const user = [
     {
       name: fName,
@@ -27,9 +39,10 @@ const registerUser = async () => {
       myFavourites: [],
       username: username,
       password: password,
+      registerDate: convertTimezone(date),
     }
   ];
-
+  
   try {
     if (await verifyUsername(username)) {
       return displayError("Användarnamnet finns redan");
@@ -55,20 +68,6 @@ submitFormBtn.addEventListener("click", async (e) => {
   e.preventDefault();
   await registerUser();
 });
-const getData = async () => {
-  try {
-    const res = await fetch(database_url, {
-      method: "GET",
-      headers: getHeaders(),
-    });
-    if (!res.ok) {
-      throw new Error("Något blev fel i databasen för verifiering av username", res.status);
-    }
-    const data = await res.json();
-  } catch (error) {
-    console.error(error);
-  }
-};
 const succesfullRegistration = (user) => {
   const registerForm = document.querySelector("#registerForm");
   registerForm.innerHTML = "";
