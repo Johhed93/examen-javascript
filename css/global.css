@@ -67,6 +67,7 @@ nav {
 button {
   cursor: pointer;
   font-family: "Yanone Kaffeesatz", sans-serif;
+  outline: none;
 }
 input {
   outline: none;
@@ -75,6 +76,7 @@ input {
   font-family: "Yanone Kaffeesatz", sans-serif;
   font-size: 1.1rem;
 }
+
 .container {
   padding: 30px;
   margin-top: 30px;

@@ -1,4 +1,4 @@
-import { getHeaders, database_url, checkIfLoggedIn, seePassword, getLoggedInUser, removeFromFavourties} from "./global.js";
+import { getHeaders, database_url, checkIfLoggedIn, seePassword, getLoggedInUser, removeFromFavourties, verifyUsername} from "./global.js";
 checkIfLoggedIn()
 const myPageContainer=document.querySelector("#myPageContainer")
 const fetchUser= async()=>{
@@ -15,19 +15,7 @@ const fetchUser= async()=>{
     }
 }
 fetchUser()
-/* const paragraphToInput =(p, container, user)=>{
-    let input=document.createElement("input");
-    input.classList.add("edit-input");
-    input.value=user.name;
-    container.appendChild(input);
-    p.remove();
-}
-const inputToParagrph = (input, container, user)=>{
-    let p=document.createElement("p");
-    p.innerHTML=user.name;
-    container.appendChild(p);
-    input.remove();
-} */
+
 const showUser= (user)=>{
     const firstRow= document.createElement("div");
     firstRow.classList.add("first-row");
@@ -45,13 +33,16 @@ const showUser= (user)=>{
     const usernameTitle=document.createElement("p");
     usernameTitle.innerHTML=`Användarnamn:`;
     const usernameText= document.createElement("p");
-    usernameText.innerHTML=` ${user.username}`;
+    usernameText.innerHTML=user.username;
     usernameTextContainer.appendChild(usernameTitle);
     usernameTextContainer.appendChild(usernameText);
     usernameBox.appendChild(usernameTextContainer);
     const editUsername= document.createElement("button");
     editUsername.innerHTML=`<i class="fa-solid fa-pen"></i>`
     editUsername.classList.add("edit-btn")
+    editUsername.addEventListener("click", ()=>{
+        editState(user, "username", myPageContainer)
+    })
     usernameBox.appendChild(editUsername)
     profileContainer.appendChild(usernameBox)
     
@@ -62,13 +53,16 @@ const showUser= (user)=>{
     const nameTitle=document.createElement("p");
     nameTitle.innerHTML=`Förnavn:`;
     const nameText= document.createElement("p");
-    nameText.innerHTML=` ${user.name}`;
+    nameText.innerHTML=user.name;
     nameTextContainer.appendChild(nameTitle);
     nameTextContainer.appendChild(nameText);
     nameBox.appendChild(nameTextContainer);
     const editName= document.createElement("button");
     editName.innerHTML=`<i class="fa-solid fa-pen"></i>`
     editName.classList.add("edit-btn")
+    editName.addEventListener("click", ()=>{
+        editState (user, "name", myPageContainer)
+    })
     
     nameBox.appendChild(editName)
     profileContainer.appendChild(nameBox)
@@ -87,6 +81,9 @@ const showUser= (user)=>{
     const editLName= document.createElement("button");
     editLName.innerHTML=`<i class="fa-solid fa-pen"></i>`
     editLName.classList.add("edit-btn")
+    editLName.addEventListener("click", ()=>{
+        editState(user, "lastname", myPageContainer)
+    })
     lastNameBox.appendChild(editLName)
     profileContainer.appendChild(lastNameBox)
 
@@ -155,6 +152,7 @@ const showUser= (user)=>{
     link.innerHTML=`Hitta favoriter`
     list.appendChild(li)
     li.appendChild(container);
+    
     container.appendChild(message);
     container.appendChild(link)
     }else{
@@ -202,5 +200,76 @@ const showUser= (user)=>{
             list.appendChild(li)
         })
     }
+    
 
+}
+const changeUserInformation= async(object,newValue, data)=>{
+ data[object]=newValue;
+ 
+ await updateUser(data)
+ await fetchUser()
+}
+const updateUser= async(data)=>{
+    try{
+    const res= await fetch(`${database_url}/${getLoggedInUser()}`,{
+        method:"PUT",
+        headers:getHeaders(),
+        body:JSON.stringify(data)
+    })
+    }catch(error){
+        console.error("Något blev feil i uppdatering av bruker", error)
+    }
+}
+const editState = (user, object, parent)=>{
+    const editProfileContainer = document.createElement("div");
+    editProfileContainer.classList.add("profile-container");
+    editProfileContainer.classList.add("position-absolute")
+
+    const headline= document.createElement("h2");
+    headline.innerHTML=`Redigera ${object}: ${user[object]}` 
+    editProfileContainer.appendChild(headline)
+    const input = document.createElement("input");
+    input.type = "text"; 
+    input.classList.add("inputs")
+    input.placeholder=user[object]
+
+    const submitButton = document.createElement("button");
+    submitButton.innerHTML = "Uppdatera";
+    submitButton.style.marginTop="50px"
+    submitButton.style.border="none"
+    submitButton.style.width="300px"
+    submitButton.classList.add("link");
+    submitButton.addEventListener("click", async()=>{
+        if(!input.value){
+            return alert("Du måste skriva något")
+        }
+        if(input.value===user[object]){
+            return alert("Du måste uppdatera till ett annat verdi")
+        }
+        if(object==="username"){
+            if(await verifyUsername(input.value.toLowerCase())){
+                return alert("Detta användernamnet är upptaget")
+            }
+        }
+        user[object]=input.value;
+        await updateUser(user)
+        await fetchUser()
+        editProfileContainer.remove(); 
+    })
+
+    const removeButton = document.createElement("button");
+    removeButton.innerHTML = `<i class="fa-solid fa-x"></i>`; 
+    removeButton.classList.add("x-btn")
+   
+    removeButton.addEventListener("click", function() {
+        editProfileContainer.remove(); 
+    });
+
+   
+    editProfileContainer.appendChild(input);
+    editProfileContainer.appendChild(submitButton);
+    editProfileContainer.appendChild(removeButton);
+
+   
+   parent.appendChild(editProfileContainer)
 }
