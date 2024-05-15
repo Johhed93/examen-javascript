@@ -29,7 +29,7 @@ const getYear = () => {
   const date = new Date();
   return date.getFullYear();
 };
-getYear();
+
 
 const showCharacter = async (character) => {
   
