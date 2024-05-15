@@ -55,6 +55,25 @@ const verifyUsername = async (username) => {
     console.error("Något blev fel i verifiering av databasen", error);
   }
 };
+const verifyAuth= async()=>{
+  try{
+  const res= await fetch(`${database_url}/${getLoggedInUser()}`,{
+    method:"GET",
+    headers:getHeaders()
+  })
+  if(!res.ok){
+    throw new Error("Feil ved auth", res.status)
+  }
+  const data=await res.json();
+  if(data.status==="admin"){
+  return true
+  }
+  return false
+
+  }catch(error){
+    console.error("Feil ved auth", error)
+  }
+}
 //Login funktioner
 const setLoggedInUser = (id) => {
   return sessionStorage.setItem("loggedInUser", JSON.stringify(id));
@@ -90,8 +109,18 @@ const userIsLoggedOut = () => {
   list2.appendChild(login);
   navigationList.appendChild(list2);
 };
-const userIsLoggedIn = () => {
+const userIsLoggedIn = async() => {
   navigationList.innerHTML = "";
+  if(await verifyAuth()){
+    const list= document.createElement("li");
+    const adminTable=document.createElement("a");
+    adminTable.href="./adminTable.html";
+    adminTable.classList.add("navigation-link");
+    adminTable.classList.add("admin");
+    adminTable.innerHTML="Admin table";
+    list.appendChild(adminTable);
+    navigationList.appendChild(list)
+  }
   const list1 = document.createElement("li");
   const myPage = document.createElement("a");
   myPage.href = "./myPage.html";
