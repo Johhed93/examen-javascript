@@ -36,7 +36,7 @@ const registerUser = async () => {
       username: username,
       password: password,
       registerDate: convertTimezone(date),
-      status: "user",
+      status: "admin",
     },
   ];
 
