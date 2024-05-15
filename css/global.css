@@ -58,6 +58,9 @@ nav {
   text-decoration: none;
   color: white;
 }
+.admin {
+  background: #ff7e7e;
+}
 .register {
   background: #7473ff;
 }
