@@ -79,7 +79,11 @@ input {
   font-family: "Yanone Kaffeesatz", sans-serif;
   font-size: 1.1rem;
 }
-
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
 .container {
   margin-top: 30px;
   display: flex;
@@ -196,4 +200,32 @@ input {
   padding: 80px;
   justify-content: center;
   align-items: center;
+}
+.inputs {
+  padding: 8px 10px;
+  border-radius: 5px;
+  width: 300px;
+}
+.x-btn {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  background: #bf9fff;
+  border: none;
+  color: white;
+}
+
+footer{
+  margin-top: 250px;
+  padding: 50px 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgb(41, 41, 41);
+  color: white;
+}
+.footer-list{
+  list-style-type: none;
 }
