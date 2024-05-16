@@ -103,18 +103,4 @@
   align-items: center;
   top: 0;
 }
-.inputs {
-  padding: 8px 10px;
-  border-radius: 5px;
-  width: 300px;
-}
-.x-btn {
-  position: absolute;
-  right: 10px;
-  top: 10px;
-  padding: 10px;
-  border-radius: 10px;
-  background: #bf9fff;
-  border: none;
-  color: white;
-}
+

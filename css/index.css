@@ -76,6 +76,7 @@ h1 {
   align-items: center;
   flex-direction: column;
   gap: 10px;
+  font-size: 1.1rem;
   color: rgb(207, 134, 255);
 }
 .input {
