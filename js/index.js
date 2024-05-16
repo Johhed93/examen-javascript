@@ -114,6 +114,16 @@ const showStatusButton = (data) => {
   });
   statusClass.appendChild(neither);
 };
+const removeNullYear = (data) =>{
+  let onlyYears= []
+  data.forEach(char=>{
+  if(char.yearOfBirth===null){
+    return;
+  }
+  onlyYears.push(char)
+})
+return onlyYears
+}
 const showAdvancedButton =(data)=>{
   const button= document.createElement("button");
   button.classList.add("big-button");
@@ -203,11 +213,43 @@ div.appendChild(spellBox)
 
 const yearBox= document.createElement("div");
 yearBox.classList.add("column-box");
+div.appendChild(yearBox)
 
 const yearText=document.createElement("h3");
-yearText.innerHTML=``
+yearText.innerHTML=`Sortera från ålder`;
+yearBox.appendChild(yearText);
 
+const yearBtnContainer=document.createElement("div");
+yearBtnContainer.classList.add("btn-container");
+yearBox.appendChild(yearBtnContainer);
 
+const youngest= document.createElement("button");
+youngest.innerHTML=`Yngst`;
+youngest.classList.add("house-btn");
+youngest.classList.add("unknown");
+youngest.addEventListener("click", ()=>{
+  const onlyYears=removeNullYear(data);
+  currentPage=1;
+  currentCharacterList=onlyYears.sort((a,b)=>{
+    return b.yearOfBirth-a.yearOfBirth
+  })
+  displayData();
+})
+yearBtnContainer.appendChild(youngest)
+
+const oldest= document.createElement("button");
+oldest.innerHTML=`Äldst`;
+oldest.classList.add("house-btn");
+oldest.classList.add("unknown");
+oldest.addEventListener("click", ()=>{
+const onlyYears= removeNullYear(data);
+currentPage = 1;
+  currentCharacterList = onlyYears.sort((a,b)=>{
+    return a.yearOfBirth-b.yearOfBirth
+  })
+  displayData();
+} )
+yearBtnContainer.appendChild(oldest)
 
 
 }
