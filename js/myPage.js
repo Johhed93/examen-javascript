@@ -202,6 +202,10 @@ const showUser = (user) => {
   signOut.classList.add("house-btn");
   signOut.innerHTML = "Logga ut";
   signOut.classList.add("unknown");
+  signOut.addEventListener("click", ()=>{
+      sessionStorage.removeItem("loggedInUser");
+      window.location = "./index.html";
+  })
   userActions.appendChild(signOut);
 
   const deleteAccount = document.createElement("button");
