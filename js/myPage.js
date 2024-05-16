@@ -257,7 +257,12 @@ const showUser = (user) => {
       li.appendChild(container);
       const picture = document.createElement("img");
       picture.classList.add("picture");
-      picture.src = char.image;
+      if(char.image===""){
+        picture.src="./assets/wizard.png"
+      }else{
+        picture.src = char.image;
+      }
+      
 
       const name = document.createElement("p");
       name.innerHTML = char.name;
