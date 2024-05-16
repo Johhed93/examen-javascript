@@ -186,4 +186,5 @@ export {
   removeFromFavourties,
   verifyUsername,
   deleteUser,
+  verifyAuth
 };

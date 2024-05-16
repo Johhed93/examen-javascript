@@ -4,13 +4,23 @@ import {
   checkIfLoggedIn,
   getLoggedInUser,
   deleteUser,
+  verifyAuth
 } from "./global.js";
 checkIfLoggedIn();
 
 const userContainer = document.querySelector("#userContainer");
 const myPageContainer = document.querySelector("#myPageContainer");
 const headline = document.querySelector("#headline");
-
+const verifyStatus= async ()=> {
+  if(getLoggedInUser()===null){
+    return window.location="./index.html"
+  }
+  if(!await verifyAuth()){
+  return window.location="./index.html"
+  }
+  fetchData();
+}
+verifyStatus()
 const fetchData = async () => {
   const res = await fetch(database_url, {
     method: "GET",
@@ -26,7 +36,7 @@ const fetchData = async () => {
     showUsers(user);
   });
 };
-fetchData();
+
 const confirmDelete = (user) => {
   const div = document.createElement("div");
   div.classList.add("delete-container");
