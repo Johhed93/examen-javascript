@@ -1,4 +1,4 @@
-import { getHeaders, database_url, checkIfLoggedIn, getLoggedInUser } from "./global.js";
+import { getHeaders, database_url, checkIfLoggedIn, getLoggedInUser, deleteUser} from "./global.js";
 checkIfLoggedIn();
 
 const userContainer = document.querySelector("#userContainer");
@@ -37,12 +37,20 @@ deleteBtn.classList.add("green");
 deleteBtn.classList.add("delete-btn");
 deleteBtn.classList.add("bigger-btn");
 deleteBtn.innerHTML=`Ja`;
+deleteBtn.addEventListener("click", async()=>{
+  await deleteUser(user._uuid)
+  await fetchData()
+})
+
 btnContainer.appendChild(deleteBtn);
 
 const closeBtn= document.createElement("button");
 closeBtn.classList.add("bigger-btn");
 closeBtn.classList.add("delete-btn");
 closeBtn.innerHTML=`Nej`;
+closeBtn.addEventListener("click", ()=>{
+  div.remove()
+})
 btnContainer.appendChild(closeBtn);
 div.appendChild(btnContainer);
 myPageContainer.appendChild(div)
@@ -62,13 +70,14 @@ const registredToday = (data) => {
 };
 const monthlyRegistred = (data) => {
   const today = new Date();
-  const allNewMembers = data.filter((newMembers) => {
+  const allNewMembers= data.filter((newMembers) => {
     const timestamp = new Date(newMembers.registerDate);
     return (
       timestamp.getFullYear() === today.getFullYear() && timestamp.getMonth() === today.getMonth()
     );
   });
-  return allNewMembers;
+  return allNewMembers
+ 
 };
 
 const showData = (data) => {
