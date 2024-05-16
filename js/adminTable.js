@@ -1,6 +1,10 @@
 import { getHeaders, database_url, checkIfLoggedIn, getLoggedInUser } from "./global.js";
 checkIfLoggedIn();
 
+const userContainer = document.querySelector("#userContainer");
+const myPageContainer = document.querySelector("#myPageContainer");
+const headline = document.querySelector("#headline");
+
 const fetchData = async () => {
   const res = await fetch(database_url, {
     method: "GET",
@@ -17,7 +21,33 @@ const fetchData = async () => {
   });
 };
 fetchData();
+const confirmDelete=(user)=>{
+const div= document.createElement("div");
+div.classList.add("delete-container");
+div.classList.add("centered-element");
+const text= document.createElement("p");
+text.classList.add("large-text");
+text.innerHTML=`Är du säker du vill radera ${user.username}`;
+div.appendChild(text);
 
+const btnContainer=document.createElement("div");
+btnContainer.classList.add("btn-container");
+const deleteBtn= document.createElement("button");
+deleteBtn.classList.add("green");
+deleteBtn.classList.add("delete-btn");
+deleteBtn.classList.add("bigger-btn");
+deleteBtn.innerHTML=`Ja`;
+btnContainer.appendChild(deleteBtn);
+
+const closeBtn= document.createElement("button");
+closeBtn.classList.add("bigger-btn");
+closeBtn.classList.add("delete-btn");
+closeBtn.innerHTML=`Nej`;
+btnContainer.appendChild(closeBtn);
+div.appendChild(btnContainer);
+myPageContainer.appendChild(div)
+
+}
 const registredToday = (data) => {
   const today = new Date();
   const allNewMembers = data.filter((newMembers) => {
@@ -40,9 +70,7 @@ const monthlyRegistred = (data) => {
   });
   return allNewMembers;
 };
-const userContainer = document.querySelector("#userContainer");
-const myPageContainer = document.querySelector("#myPageContainer");
-const headline = document.querySelector("#headline");
+
 const showData = (data) => {
   const firstRow = document.createElement("div");
   firstRow.classList.add("first-row");
@@ -147,6 +175,9 @@ const showUsers = (user) => {
   const remove = document.createElement("button");
   remove.classList.add("delete-btn");
   remove.innerHTML = `Ta bort`;
+  remove.addEventListener("click", ()=>{
+    confirmDelete(user)
+  })
   buttonContainer.appendChild(remove);
   container.appendChild(buttonContainer);
   userContainer.appendChild(li);
