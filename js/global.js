@@ -74,6 +74,21 @@ const verifyAuth= async()=>{
     console.error("Feil ved auth", error)
   }
 }
+const deleteUser= async(userid)=>{
+  try{
+  const res= await fetch(`${database_url}/${userid}`,{
+    method:"DELETE",
+    headers:getHeaders()
+  })
+  if(!res.ok){
+    alert("Något blev fel försök igen")
+    throw new Error("Feil ved sletting", res.status)
+  }
+
+  }catch(error){
+    console.error("feil ved sletting", error)
+  }
+}
 //Login funktioner
 const setLoggedInUser = (id) => {
   return sessionStorage.setItem("loggedInUser", JSON.stringify(id));
@@ -162,7 +177,6 @@ const seePassword = (input, element) => {
     element.innerHTML = `<i class="fa-solid fa-eye"></i>`;
   }
 };
-
 export {
   database_url,
   getHeaders,
@@ -173,5 +187,6 @@ export {
   firstBigLetter,
   seePassword,
   removeFromFavourties,
-  verifyUsername
+  verifyUsername,
+  deleteUser
 };
