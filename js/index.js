@@ -4,6 +4,7 @@ checkIfLoggedIn();
 const harryPotter_URL = "https://hp-api.onrender.com/api/characters";
 const characterList = document.querySelector("#characterList");
 const titleOfContent = document.querySelector("#titleOfContent");
+const advancedSearch= document.querySelector("#advanced")
 
 //Används för att visa frem antalet karaktärer på sidan. Fått hjälp av chatgpt men gjort det förr.
 let currentPage = 1;
@@ -20,6 +21,7 @@ const fetchHarryData = async () => {
     showHousesButton(data);
     showStatusButton(data);
     showSearchBar(data);
+    showAdvancedButton(data)
   } catch (error) {
     console.error("Något blev fel med fetchning i fetchHarryData", error);
   }
@@ -112,7 +114,28 @@ const showStatusButton = (data) => {
   });
   statusClass.appendChild(neither);
 };
+const showAdvancedButton =(data)=>{
+  const button= document.createElement("button");
+  button.classList.add("big-button");
+  button.innerHTML=`Avancerad sök <i class="fa-solid fa-arrow-down"></i>`
+  button.addEventListener("click", ()=>{
+     if(!button.classList.contains("active")){
+      button.innerHTML= `Avancerad sök <i class="fa-solid fa-arrow-up"></i>`
+      button.classList.add("active")
+      showAdvancedSearch(data)
+     }else{
+      button.innerHTML=`Avancerad sök <i class="fa-solid fa-arrow-down"></i>`
+      button.classList.remove("active");
+      advancedSearch.innerHTML="";
+      showAdvancedButton(data)
+    }
+  })
+  advancedSearch.appendChild(button)
+}
+const showAdvancedSearch = (data)=>{
 
+
+}
 // Fått hjälp av chatgpt med displayData() prompt "här har jag alla harry potter karaktärer som är teacher t:ex jag vill bara visa fram 12 åt gången och
 // när jag trycker på en knapp längst ner på dokumentet (inte skapat än) så ska du kunna gå igenom nästa 12 så man inte visar fram
 // 100 objekter på en gång. hur gör jag det?"
