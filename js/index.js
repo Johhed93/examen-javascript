@@ -124,7 +124,7 @@ const showAdvancedButton =(data)=>{
       button.classList.add("active")
       showAdvancedSearch(data)
      }else{
-      button.innerHTML=`Avancerad sök <i class="fa-solid fa-arrow-down"></i>`
+      button.innerHTML=`Ta bort <i class="fa-solid fa-arrow-down"></i>`
       button.classList.remove("active");
       advancedSearch.innerHTML="";
       showAdvancedButton(data)
@@ -133,6 +133,81 @@ const showAdvancedButton =(data)=>{
   advancedSearch.appendChild(button)
 }
 const showAdvancedSearch = (data)=>{
+const div = document.createElement("div");
+div.style.marginTop="10px"
+div.classList.add("first-search-row");
+advancedSearch.appendChild(div);
+
+const aliveBox= document.createElement("div");
+aliveBox.classList.add("column-box");
+const aliveText= document.createElement("h3");
+aliveText.innerHTML=`Lever karaktären?`;
+aliveBox.appendChild(aliveText)
+const aliveBtns=document.createElement("div");
+aliveBtns.classList.add("button-container");
+aliveBox.appendChild(aliveBtns)
+const alive= Array.from(new Set(data.map(char=> char.alive)));
+alive.forEach(char=>{
+  const button=document.createElement("button");
+  button.classList.add("house-btn");
+  button.setAttribute("value", `${char}`);
+  if(!char){
+    button.innerHTML=`Nej`;
+    button.classList.add("Gryffindor");
+    
+  }else{
+    button.innerHTML=`Ja`
+    button.classList.add("Slytherin");
+  }
+  button.addEventListener("click", ()=>{
+      currentPage = 1;
+      const isAlive= JSON.parse(button.getAttribute("value"))
+      currentCharacterList = data.filter((status) => status.alive ===isAlive);
+      displayData();
+  })
+  aliveBtns.appendChild(button)
+})
+div.appendChild(aliveBox)
+
+const patronus= Array.from(new Set(data.map(char=>char.patronus)))
+const spellBox= document.createElement("div");
+spellBox.classList.add("column-box");
+
+const spellText=document.createElement("h3");
+spellText.innerHTML=`Finn fram vem som har vilken patrounus`;
+
+const selectedSpell=document.createElement("select");
+selectedSpell.classList.add("select")
+const defaultStatus= document.createElement("option");
+defaultStatus.innerHTML=`Välj ett alternativ`;
+defaultStatus.selected=true
+selectedSpell.appendChild(defaultStatus);
+patronus.forEach(spell=>{
+  if(spell===""){
+    return;
+  }
+  const option= document.createElement("option");
+  option.innerHTML=spell;
+  selectedSpell.appendChild(option)
+})
+selectedSpell.addEventListener("click", ()=>{
+  const selectedOption= selectedSpell.value;
+  currentPage = 1;
+  currentCharacterList = data.filter((spell) => spell.patronus ===selectedOption);
+  displayData();
+})
+
+spellBox.appendChild(spellText)
+spellBox.appendChild(selectedSpell)
+div.appendChild(spellBox)
+
+const yearBox= document.createElement("div");
+yearBox.classList.add("column-box");
+
+const yearText=document.createElement("h3");
+yearText.innerHTML=``
+
+
 
 
 }
