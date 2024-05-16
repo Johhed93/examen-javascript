@@ -4,7 +4,7 @@ checkIfLoggedIn();
 const harryPotter_URL = "https://hp-api.onrender.com/api/characters";
 const characterList = document.querySelector("#characterList");
 const titleOfContent = document.querySelector("#titleOfContent");
-const advancedSearch= document.querySelector("#advanced")
+const advancedSearch = document.querySelector("#advanced");
 
 //Används för att visa frem antalet karaktärer på sidan. Fått hjälp av chatgpt men gjort det förr.
 let currentPage = 1;
@@ -21,7 +21,7 @@ const fetchHarryData = async () => {
     showHousesButton(data);
     showStatusButton(data);
     showSearchBar(data);
-    showAdvancedButton(data)
+    showAdvancedButton(data);
   } catch (error) {
     console.error("Något blev fel med fetchning i fetchHarryData", error);
   }
@@ -114,145 +114,176 @@ const showStatusButton = (data) => {
   });
   statusClass.appendChild(neither);
 };
-const removeNullYear = (data) =>{
-  let onlyYears= []
-  data.forEach(char=>{
-  if(char.yearOfBirth===null){
-    return;
-  }
-  onlyYears.push(char)
-})
-return onlyYears
-}
-const showAdvancedButton =(data)=>{
-  const button= document.createElement("button");
-  button.classList.add("big-button");
-  button.innerHTML=`Avancerad sök <i class="fa-solid fa-arrow-down"></i>`
-  button.addEventListener("click", ()=>{
-     if(!button.classList.contains("active")){
-      button.innerHTML= `Avancerad sök <i class="fa-solid fa-arrow-up"></i>`
-      button.classList.add("active")
-      showAdvancedSearch(data)
-     }else{
-      button.innerHTML=`Ta bort <i class="fa-solid fa-arrow-down"></i>`
-      button.classList.remove("active");
-      advancedSearch.innerHTML="";
-      showAdvancedButton(data)
+const removeNullYear = (data, objekt) => {
+  let onlyYears = [];
+  data.forEach((char) => {
+    if (char[objekt] === null || char[objekt]==="") {
+      return;
     }
-  })
-  advancedSearch.appendChild(button)
-}
-const showAdvancedSearch = (data)=>{
-const div = document.createElement("div");
-div.style.marginTop="10px"
-div.classList.add("first-search-row");
-advancedSearch.appendChild(div);
+    onlyYears.push(char);
+  });
+  return onlyYears;
+};
+const showAdvancedButton = (data) => {
+  const button = document.createElement("button");
+  button.classList.add("big-button");
+  button.innerHTML = `Avancerad sök <i class="fa-solid fa-arrow-down"></i>`;
+  button.addEventListener("click", () => {
+    if (!button.classList.contains("active")) {
+      button.innerHTML = `Avancerad sök <i class="fa-solid fa-arrow-up"></i>`;
+      button.classList.add("active");
+      showAdvancedSearch(data);
+    } else {
+      button.innerHTML = `Ta bort <i class="fa-solid fa-arrow-down"></i>`;
+      button.classList.remove("active");
+      advancedSearch.innerHTML = "";
+      showAdvancedButton(data);
+    }
+  });
+  advancedSearch.appendChild(button);
+};
+const showAdvancedSearch = (data) => {
+  const div = document.createElement("div");
+  div.style.marginTop = "10px";
+  div.classList.add("first-search-row");
+  advancedSearch.appendChild(div);
 
-const aliveBox= document.createElement("div");
-aliveBox.classList.add("column-box");
-const aliveText= document.createElement("h3");
-aliveText.innerHTML=`Lever karaktären?`;
-aliveBox.appendChild(aliveText)
-const aliveBtns=document.createElement("div");
-aliveBtns.classList.add("button-container");
-aliveBox.appendChild(aliveBtns)
-const alive= Array.from(new Set(data.map(char=> char.alive)));
-alive.forEach(char=>{
-  const button=document.createElement("button");
-  button.classList.add("house-btn");
-  button.setAttribute("value", `${char}`);
-  if(!char){
-    button.innerHTML=`Nej`;
-    button.classList.add("Gryffindor");
-    
-  }else{
-    button.innerHTML=`Ja`
-    button.classList.add("Slytherin");
-  }
-  button.addEventListener("click", ()=>{
+  const aliveBox = document.createElement("div");
+  aliveBox.classList.add("column-box");
+  const aliveText = document.createElement("h3");
+  aliveText.innerHTML = `Lever karaktären?`;
+  aliveBox.appendChild(aliveText);
+  const aliveBtns = document.createElement("div");
+  aliveBtns.classList.add("button-container");
+  aliveBox.appendChild(aliveBtns);
+  const alive = Array.from(new Set(data.map((char) => char.alive)));
+  alive.forEach((char) => {
+    const button = document.createElement("button");
+    button.classList.add("house-btn");
+    button.setAttribute("value", `${char}`);
+    if (!char) {
+      button.innerHTML = `Nej`;
+      button.classList.add("Gryffindor");
+    } else {
+      button.innerHTML = `Ja`;
+      button.classList.add("Slytherin");
+    }
+    button.addEventListener("click", () => {
       currentPage = 1;
-      const isAlive= JSON.parse(button.getAttribute("value"))
-      currentCharacterList = data.filter((status) => status.alive ===isAlive);
+      characterList.innerHTML=""
+      const isAlive = JSON.parse(button.getAttribute("value"));
+      if (!isAlive) {
+        titleOfContent.innerHTML = `Alla som har dött`;
+      } else {
+        titleOfContent.innerHTML = `Alla levande`;
+      }
+      currentCharacterList = data.filter((status) => status.alive === isAlive);
       displayData();
+    });
+    aliveBtns.appendChild(button);
+  });
+  div.appendChild(aliveBox);
+
+  const patronus = Array.from(new Set(data.map((char) => char.patronus)));
+  const spellBox = document.createElement("div");
+  spellBox.classList.add("column-box");
+
+  const spellText = document.createElement("h3");
+  spellText.innerHTML = `Finn fram vem som har vilken patrounus`;
+
+  const selectedSpell = document.createElement("select");
+  selectedSpell.classList.add("select");
+  const defaultStatus = document.createElement("option");
+  defaultStatus.innerHTML = `Välj ett alternativ`;
+  defaultStatus.selected = true;
+  selectedSpell.appendChild(defaultStatus);
+  patronus.forEach((spell) => {
+    if (spell === "") {
+      return;
+    }
+    const option = document.createElement("option");
+    option.innerHTML = spell;
+    selectedSpell.appendChild(option);
+  });
+  selectedSpell.addEventListener("click", () => {
+    const selectedOption = selectedSpell.value;
+   
+    titleOfContent.innerHTML = `Alla med ${selectedOption} patronus`;
+    currentPage = 1;
+    currentCharacterList = data.filter((spell) => spell.patronus === selectedOption);
+    displayData();
+  });
+
+  spellBox.appendChild(spellText);
+  spellBox.appendChild(selectedSpell);
+  div.appendChild(spellBox);
+
+  const yearBox = document.createElement("div");
+  yearBox.classList.add("column-box");
+  div.appendChild(yearBox);
+
+  const yearText = document.createElement("h3");
+  yearText.innerHTML = `Sortera från ålder`;
+  yearBox.appendChild(yearText);
+
+  const yearBtnContainer = document.createElement("div");
+  yearBtnContainer.classList.add("btn-container");
+  yearBox.appendChild(yearBtnContainer);
+
+  const youngest = document.createElement("button");
+  youngest.innerHTML = `Yngst`;
+  youngest.classList.add("house-btn");
+  youngest.classList.add("unknown");
+  youngest.addEventListener("click", () => {
+    titleOfContent.innerHTML = `Från yngst till äldst`;
+    
+    const onlyYears = removeNullYear(data, "yearOfBirth");
+    currentPage = 1;
+    currentCharacterList = onlyYears.sort((a, b) => {
+      return b.yearOfBirth - a.yearOfBirth;
+    });
+    displayData();
+  });
+  yearBtnContainer.appendChild(youngest);
+
+  const oldest = document.createElement("button");
+  oldest.innerHTML = `Äldst`;
+  oldest.classList.add("house-btn");
+  oldest.classList.add("unknown");
+  oldest.addEventListener("click", () => {
+    titleOfContent.innerHTML = `Från äldst till yngst`;
+   
+    const onlyYears = removeNullYear(data, "yearOfBirth");
+    currentPage = 1;
+    currentCharacterList = onlyYears.sort((a, b) => {
+      return a.yearOfBirth - b.yearOfBirth;
+    });
+    displayData();
+  });
+  yearBtnContainer.appendChild(oldest);
+
+  const showImageContainer= document.createElement("div");
+  showImageContainer.classList.add("column-box");
+  div.appendChild(showImageContainer);
+  const showText= document.createElement("h3");
+  showText.innerHTML=`Visa frem alla med bild`;
+  showImageContainer.appendChild(showText);
+
+  const showImage=document.createElement("button");
+  showImage.classList.add("house-btn");
+  showImage.innerHTML=`Visa alla med bild`;
+  showImage.addEventListener("click", ()=>{
+    const onlyYears = removeNullYear(data, "image")
+    
+    currentPage = 1;
+    currentCharacterList = onlyYears.sort((a, b) => {
+      return a.yearOfBirth - b.yearOfBirth;
+    });
+    displayData();
   })
-  aliveBtns.appendChild(button)
-})
-div.appendChild(aliveBox)
-
-const patronus= Array.from(new Set(data.map(char=>char.patronus)))
-const spellBox= document.createElement("div");
-spellBox.classList.add("column-box");
-
-const spellText=document.createElement("h3");
-spellText.innerHTML=`Finn fram vem som har vilken patrounus`;
-
-const selectedSpell=document.createElement("select");
-selectedSpell.classList.add("select")
-const defaultStatus= document.createElement("option");
-defaultStatus.innerHTML=`Välj ett alternativ`;
-defaultStatus.selected=true
-selectedSpell.appendChild(defaultStatus);
-patronus.forEach(spell=>{
-  if(spell===""){
-    return;
-  }
-  const option= document.createElement("option");
-  option.innerHTML=spell;
-  selectedSpell.appendChild(option)
-})
-selectedSpell.addEventListener("click", ()=>{
-  const selectedOption= selectedSpell.value;
-  currentPage = 1;
-  currentCharacterList = data.filter((spell) => spell.patronus ===selectedOption);
-  displayData();
-})
-
-spellBox.appendChild(spellText)
-spellBox.appendChild(selectedSpell)
-div.appendChild(spellBox)
-
-const yearBox= document.createElement("div");
-yearBox.classList.add("column-box");
-div.appendChild(yearBox)
-
-const yearText=document.createElement("h3");
-yearText.innerHTML=`Sortera från ålder`;
-yearBox.appendChild(yearText);
-
-const yearBtnContainer=document.createElement("div");
-yearBtnContainer.classList.add("btn-container");
-yearBox.appendChild(yearBtnContainer);
-
-const youngest= document.createElement("button");
-youngest.innerHTML=`Yngst`;
-youngest.classList.add("house-btn");
-youngest.classList.add("unknown");
-youngest.addEventListener("click", ()=>{
-  const onlyYears=removeNullYear(data);
-  currentPage=1;
-  currentCharacterList=onlyYears.sort((a,b)=>{
-    return b.yearOfBirth-a.yearOfBirth
-  })
-  displayData();
-})
-yearBtnContainer.appendChild(youngest)
-
-const oldest= document.createElement("button");
-oldest.innerHTML=`Äldst`;
-oldest.classList.add("house-btn");
-oldest.classList.add("unknown");
-oldest.addEventListener("click", ()=>{
-const onlyYears= removeNullYear(data);
-currentPage = 1;
-  currentCharacterList = onlyYears.sort((a,b)=>{
-    return a.yearOfBirth-b.yearOfBirth
-  })
-  displayData();
-} )
-yearBtnContainer.appendChild(oldest)
-
-
-}
+  showImageContainer.appendChild(showImage)
+  
+};
 // Fått hjälp av chatgpt med displayData() prompt "här har jag alla harry potter karaktärer som är teacher t:ex jag vill bara visa fram 12 åt gången och
 // när jag trycker på en knapp längst ner på dokumentet (inte skapat än) så ska du kunna gå igenom nästa 12 så man inte visar fram
 // 100 objekter på en gång. hur gör jag det?"
