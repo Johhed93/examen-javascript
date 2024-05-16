@@ -83,22 +83,22 @@ const monthlyRegistred = (data) => {
   });
   return allNewMembers;
 };
-const updateUser= async(data)=>{
-  try{
-  const res= await fetch(`${database_url}/${data._uuid}`,{
-    method:"PUT",
-    headers:getHeaders(),
-    body:JSON.stringify(data)
-  })
-  if(!res.ok){
-    throw new Error("feil i database updateuser", res.status)
+const updateUser = async (data) => {
+  try {
+    const res = await fetch(`${database_url}/${data._uuid}`, {
+      method: "PUT",
+      headers: getHeaders(),
+      body: JSON.stringify(data),
+    });
+    if (!res.ok) {
+      throw new Error("feil i database updateuser", res.status);
+    }
+  } catch (error) {
+    console.error("feil i update", error);
   }
-  }catch(error){
-    console.error("feil i update", error)
-  }
-}
+};
 const showData = (data) => {
-  myPageContainer.innerHTML=""
+  myPageContainer.innerHTML = "";
   const firstRow = document.createElement("div");
   firstRow.classList.add("first-row");
 
@@ -197,9 +197,9 @@ const showUsers = (user) => {
   const change = document.createElement("button");
   change.innerHTML = `<i class="fa-solid fa-gear"></i>`;
   change.classList.add("interface");
-  change.addEventListener("click", ()=>{
-    editUser(user)
-  })
+  change.addEventListener("click", () => {
+    editUser(user);
+  });
   buttonContainer.appendChild(change);
 
   const remove = document.createElement("button");
@@ -212,101 +212,105 @@ const showUsers = (user) => {
   container.appendChild(buttonContainer);
   userContainer.appendChild(li);
 };
-const editUser= (data)=>{
-  const container=document.createElement("div");
+const editUser = (data) => {
+  const container = document.createElement("div");
   container.classList.add("delete-container");
   container.classList.add("centered-element");
-  const headline=document.createElement("h2");
-  headline.innerHTML=`Uppdatera ${data.username} innehåll`
-  container.append(headline)
-  const xBtn= document.createElement("button");
-  xBtn.innerHTML=`<i class="fa-solid fa-x"></i>`;
+  const headline = document.createElement("h2");
+  headline.innerHTML = `Uppdatera ${data.username} innehåll`;
+  container.append(headline);
+  const xBtn = document.createElement("button");
+  xBtn.innerHTML = `<i class="fa-solid fa-x"></i>`;
   xBtn.classList.add("x-btn");
-  xBtn.addEventListener("click", ()=>{
-    container.remove()
-  })
-  container.appendChild(xBtn)
+  xBtn.addEventListener("click", () => {
+    container.remove();
+  });
+  container.appendChild(xBtn);
   const form = document.createElement("form");
   form.classList.add("form-field");
 
-const fNameInputBox = document.createElement("div");
-fNameInputBox.classList.add("input-box");
-const fNameLabel = document.createElement("label");
-fNameLabel.setAttribute("for", "fNameInput");
-fNameLabel.innerHTML = `tidagare förnavn ${data.name}`;
-const fNameInput = document.createElement("input");
-fNameInput.classList.add("inputs")
-fNameInput.value=data.name;
-fNameInputBox.appendChild(fNameLabel);
-fNameInputBox.appendChild(fNameInput);
+  const fNameInputBox = document.createElement("div");
+  fNameInputBox.classList.add("input-box");
+  const fNameLabel = document.createElement("label");
+  fNameLabel.setAttribute("for", "fNameInput");
+  fNameLabel.innerHTML = `tidagare förnavn ${data.name}`;
+  const fNameInput = document.createElement("input");
+  fNameInput.classList.add("inputs");
+  fNameInput.value = data.name;
+  fNameInputBox.appendChild(fNameLabel);
+  fNameInputBox.appendChild(fNameInput);
 
-const lNameInputBox = document.createElement("div");
-lNameInputBox.classList.add("input-box");
-const lNameLabel = document.createElement("label");
-lNameLabel.setAttribute("for", "lNameInput");
-lNameLabel.innerHTML = `tidagare efternavn ${data.lastname}`;
-const lNameInput = document.createElement("input");
-lNameInput.classList.add("inputs")
-lNameInput.value=data.lastname
-lNameInputBox.appendChild(lNameLabel);
-lNameInputBox.appendChild(lNameInput);
+  const lNameInputBox = document.createElement("div");
+  lNameInputBox.classList.add("input-box");
+  const lNameLabel = document.createElement("label");
+  lNameLabel.setAttribute("for", "lNameInput");
+  lNameLabel.innerHTML = `tidagare efternavn ${data.lastname}`;
+  const lNameInput = document.createElement("input");
+  lNameInput.classList.add("inputs");
+  lNameInput.value = data.lastname;
+  lNameInputBox.appendChild(lNameLabel);
+  lNameInputBox.appendChild(lNameInput);
 
-const usernameInputBox = document.createElement("div");
-usernameInputBox.classList.add("input-box");
-const usernameLabel = document.createElement("label");
-usernameLabel.setAttribute("for", "usernameInput");
-usernameLabel.innerHTML = `tidagare användarnamn ${data.username}`;
-const usernameInput = document.createElement("input");
-usernameInput.classList.add("inputs")
-usernameInput.value=data.username
+  const usernameInputBox = document.createElement("div");
+  usernameInputBox.classList.add("input-box");
+  const usernameLabel = document.createElement("label");
+  usernameLabel.setAttribute("for", "usernameInput");
+  usernameLabel.innerHTML = `tidagare användarnamn ${data.username}`;
+  const usernameInput = document.createElement("input");
+  usernameInput.classList.add("inputs");
+  usernameInput.value = data.username;
 
-usernameInputBox.appendChild(usernameLabel);
-usernameInputBox.appendChild(usernameInput);
+  usernameInputBox.appendChild(usernameLabel);
+  usernameInputBox.appendChild(usernameInput);
 
-const passwordInputBox = document.createElement("div");
-passwordInputBox.classList.add("input-box");
-const passwordLabel = document.createElement("label");
-passwordLabel.setAttribute("for", "passwordInput");
-passwordLabel.innerHTML = `tidagare lösenord ${data.password}`;
-const passwordInput = document.createElement("input");
-passwordInput.classList.add("inputs")
-passwordInput.value=data.password
-passwordInputBox.appendChild(passwordLabel);
-passwordInputBox.appendChild(passwordInput);
+  const passwordInputBox = document.createElement("div");
+  passwordInputBox.classList.add("input-box");
+  const passwordLabel = document.createElement("label");
+  passwordLabel.setAttribute("for", "passwordInput");
+  passwordLabel.innerHTML = `tidagare lösenord ${data.password}`;
+  const passwordInput = document.createElement("input");
+  passwordInput.classList.add("inputs");
+  passwordInput.value = data.password;
+  passwordInputBox.appendChild(passwordLabel);
+  passwordInputBox.appendChild(passwordInput);
 
-const errorMsg=document.createElement("p")
-errorMsg.style.color="red"
+  const errorMsg = document.createElement("p");
+  errorMsg.style.color = "red";
 
-const confirmButton= document.createElement("button");
-confirmButton.classList.add("delete-btn");
-confirmButton.style.padding="10px 0"
-confirmButton.innerHTML=`Bekräfta`;
-confirmButton.type="submit"
-confirmButton.addEventListener("click", async(e)=>{
-e.preventDefault()
-if(!fNameInput.value || !lNameInput.value || !usernameInput.value || !passwordInput.value){
-  return errorMsg.innerHTML="Du måste fylla i alla fält"
-}
-if(fNameInput.value===data.name && lNameInput.value===data.lastname && usernameInput.value===data.username && passwordInput.value===data.password){
-  return errorMsg.innerHTML="Du måste ändra någon av värdena"
-}
-data.name=fNameInput.value;
-data.lastname=lNameInput.value;
-data.username=usernameInput.value;
-data.password=passwordInput.value;
-await updateUser(data)
-container.remove()
-await fetchData()
-})
+  const confirmButton = document.createElement("button");
+  confirmButton.classList.add("delete-btn");
+  confirmButton.style.padding = "10px 0";
+  confirmButton.innerHTML = `Bekräfta`;
+  confirmButton.type = "submit";
+  confirmButton.addEventListener("click", async (e) => {
+    e.preventDefault();
+    if (!fNameInput.value || !lNameInput.value || !usernameInput.value || !passwordInput.value) {
+      return (errorMsg.innerHTML = "Du måste fylla i alla fält");
+    }
+    if (
+      fNameInput.value === data.name &&
+      lNameInput.value === data.lastname &&
+      usernameInput.value === data.username &&
+      passwordInput.value === data.password
+    ) {
+      return (errorMsg.innerHTML = "Du måste ändra någon av värdena");
+    }
+    data.name = fNameInput.value;
+    data.lastname = lNameInput.value;
+    data.username = usernameInput.value;
+    data.password = passwordInput.value;
+    await updateUser(data);
+    container.remove();
+    await fetchData();
+  });
 
+  form.appendChild(fNameInputBox);
+  form.appendChild(lNameInputBox);
+  form.appendChild(usernameInputBox);
+  form.appendChild(passwordInputBox);
+  form.appendChild(errorMsg);
+  form.appendChild(confirmButton);
+  container.appendChild(form);
 
-form.appendChild(fNameInputBox);
-form.appendChild(lNameInputBox);
-form.appendChild(usernameInputBox);
-form.appendChild(passwordInputBox);
-form.appendChild(errorMsg)
-form.appendChild(confirmButton)
-container.appendChild(form)
-
-myPageContainer.appendChild(container)
-}
+  myPageContainer.appendChild(container);
+};
