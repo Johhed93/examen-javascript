@@ -174,3 +174,29 @@ input {
   left: 50%;
   transform: translate(-50%, -50%);
 }
+.delete-btn {
+  padding: 5px 15px;
+  border: none;
+  background-color: rgb(255, 106, 106);
+  color: white;
+  border-radius: 5px;
+}
+.bigger-btn {
+  padding: 20px 40px;
+  font-size: 1.1rem;
+}
+.green {
+  background-color: rgb(64, 226, 64);
+}
+
+.delete-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: rgb(34, 34, 34);
+  border-radius: 10px;
+  color: rgb(207, 134, 255);
+  padding: 80px;
+  justify-content: center;
+  align-items: center;
+}
