@@ -6,6 +6,7 @@ import {
   getLoggedInUser,
   removeFromFavourties,
   verifyUsername,
+  deleteUser,
 } from "./global.js";
 checkIfLoggedIn();
 const myPageContainer = document.querySelector("#myPageContainer");
@@ -23,7 +24,81 @@ const fetchUser = async () => {
   }
 };
 fetchUser();
+const confirmDelete = (user)=>{
+  const div= document.createElement("div");
+  div.classList.add("delete-container");
+  div.classList.add("centered-element");
+  const text= document.createElement("h2");
+  text.innerHTML=`Är du säker du vill radera ditt konto`;
+  div.appendChild(text);
 
+  const passwordContainer = document.createElement("div");
+  passwordContainer.classList.add("input-box");
+  const passwordLabel = document.createElement("label");
+  passwordLabel.innerHTML = `Bekräfta lösenord`;
+  passwordContainer.appendChild(passwordLabel);
+
+  const inputContainer = document.createElement("div");
+  inputContainer.classList.add("password-container");
+  const password = document.createElement("input");
+  password.type = "password";
+  password.classList.add("inputs");
+  password.placeholder = `****`;
+  const see = document.createElement("button");
+  see.classList.add("change-state");
+  see.innerHTML = `<i class="fa-solid fa-eye"></i>`;
+  see.addEventListener("click", () => {
+    seePassword(password, see);
+  });
+  const errorMsg= document.createElement("p");
+  errorMsg.style.color="red"
+  
+  inputContainer.appendChild(password)
+  inputContainer.appendChild(see)
+  passwordContainer.appendChild(inputContainer)
+  passwordContainer.appendChild(errorMsg)
+  div.appendChild(passwordContainer)
+  const btnContainer=document.createElement("div");
+  btnContainer.classList.add("btn-container");
+  const deleteBtn= document.createElement("button");
+  
+  deleteBtn.classList.add("delete-btn");
+  deleteBtn.classList.add("bigger-btn");
+  deleteBtn.classList.add("green");
+  deleteBtn.innerHTML=`Ja`;
+  btnContainer.appendChild(deleteBtn);
+  deleteBtn.addEventListener("click", async()=>{
+    if(password.value !== user.password){
+      errorMsg.innerHTML="Inputfältet matchar inte med ditt tidigare lösen"
+      return setTimeout(() => {
+        errorMsg.innerHTML=""
+      }, 3000);
+    }
+    await deleteUser(user._uuid)
+    div.innerHTML="";
+    const headline=document.createElement("h2");
+    headline.innerHTML="Kontot blev borttaget";
+    div.appendChild(headline);
+    setTimeout(() => {
+    sessionStorage.removeItem("loggedInUser");
+    window.location="./index.html"
+    }, 2000);
+  })
+
+  const closeBtn= document.createElement("button");
+  closeBtn.classList.add("bigger-btn");
+  closeBtn.classList.add("delete-btn");
+  closeBtn.innerHTML=`Nej`;
+  closeBtn.addEventListener("click", ()=>{
+  div.remove()
+})
+  btnContainer.appendChild(closeBtn)
+
+
+  div.appendChild(passwordContainer)
+  div.appendChild(btnContainer)
+  myPageContainer.appendChild(div)
+}
 const showUser = (user) => {
   const firstRow = document.createElement("div");
   firstRow.classList.add("first-row");
@@ -134,6 +209,9 @@ const showUser = (user) => {
   deleteAccount.classList.add("house-btn");
   deleteAccount.classList.add("Gryffindor");
   deleteAccount.innerHTML = `Radera konto`;
+  deleteAccount.addEventListener("click", ()=>{
+    confirmDelete(user)
+  })
   userActions.appendChild(deleteAccount);
 
   myPageContainer.appendChild(firstRow);
