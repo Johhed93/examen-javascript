@@ -105,6 +105,7 @@ h1 {
 }
 .bigger-btn {
   padding: 20px 40px;
+  font-size: 1.1rem;
 }
 .green {
   background-color: rgb(64, 226, 64);
