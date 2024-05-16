@@ -1,8 +1,4 @@
-.form-field {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
+
 h1 {
   font-size: 2.5rem;
   text-align: center;
