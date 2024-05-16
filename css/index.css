@@ -57,6 +57,7 @@ h1 {
   color: white;
   width: 150px;
   font-size: 1.1rem;
+  transition: 0.5s ease-in-out;
 }
 .search-container {
   display: flex;
@@ -155,4 +156,17 @@ h1 {
 }
 .character-name {
   font-size: 1.7rem;
+}
+.active {
+  background: #2323ff;
+}
+.wide {
+  width: 100%;
+}
+.select {
+  padding: 5px 10px;
+  border: none;
+  outline: none;
+  background-color: rgb(68, 68, 68);
+  color: white;
 }
