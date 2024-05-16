@@ -7,6 +7,7 @@ import {
   removeFromFavourties,
 } from "./global.js";
 checkIfLoggedIn();
+//Fick hjälp av chatgpt hur du hämtar information från url:en
 const urlParams = new URLSearchParams(window.location.search);
 const getCharacter = urlParams.get("character");
 const character_url = "https://hp-api.onrender.com/api/character/";
