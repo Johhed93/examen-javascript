@@ -22,7 +22,6 @@ const registerUser = async () => {
   if (!fName || !lName || !username || !password) {
     return displayError("Du måste fylla i alla fält");
   }
-  const date = new Date();
   const user = [
     {
       name: fName,
@@ -34,7 +33,6 @@ const registerUser = async () => {
       status: "user",
     },
   ];
-
   try {
     if (await verifyUsername(username)) {
       return displayError("Användarnamnet finns redan");
