@@ -202,10 +202,10 @@ const showUser = (user) => {
   signOut.classList.add("house-btn");
   signOut.innerHTML = "Logga ut";
   signOut.classList.add("unknown");
-  signOut.addEventListener("click", ()=>{
-      sessionStorage.removeItem("loggedInUser");
-      window.location = "./index.html";
-  })
+  signOut.addEventListener("click", () => {
+    sessionStorage.removeItem("loggedInUser");
+    window.location = "./index.html";
+  });
   userActions.appendChild(signOut);
 
   const deleteAccount = document.createElement("button");
@@ -257,12 +257,11 @@ const showUser = (user) => {
       li.appendChild(container);
       const picture = document.createElement("img");
       picture.classList.add("picture");
-      if(char.image===""){
-        picture.src="./assets/wizard.png"
-      }else{
+      if (char.image === "") {
+        picture.src = "./assets/wizard.png";
+      } else {
         picture.src = char.image;
       }
-      
 
       const name = document.createElement("p");
       name.innerHTML = char.name;
@@ -306,6 +305,9 @@ const updateUser = async (data) => {
       headers: getHeaders(),
       body: JSON.stringify(data),
     });
+    if (!res.ok) {
+      throw new Error("Feil i uppdate", res.status);
+    }
   } catch (error) {
     console.error("Något blev feil i uppdatering av bruker", error);
   }
