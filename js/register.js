@@ -9,14 +9,6 @@ import {
 } from "./global.js";
 
 checkIfLoggedIn();
-//hjälp av chatgpt för att konvertera till riktig tidszon prompt: "Hur konverterar jag new Date() till norsk tidzon"
-//Anledning servern hanterar new Date() på sin tidzon och därför lagrades datan 2 timmar bak.
-/* const convertTimezone = (date) => {
-  const today = new Date(date);
-  const timeZoneOffset = today.getTimezoneOffset();
-  today.setMinutes(today.getMinutes() - timeZoneOffset);
-  return today;
-}; */
 const registerUser = async () => {
   const fName = document.querySelector("#fNameInput").value;
   const lName = document.querySelector("#lNameInput").value;
@@ -27,9 +19,9 @@ const registerUser = async () => {
   if (password !== repeatPassword) {
     return displayError("Passordet matchar inte");
   }
-  if(!fName || !lName || !username|| !password){
-    return displayError("Du måste fylla i alla fält")
-  } 
+  if (!fName || !lName || !username || !password) {
+    return displayError("Du måste fylla i alla fält");
+  }
   const date = new Date();
   const user = [
     {

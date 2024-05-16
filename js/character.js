@@ -18,7 +18,7 @@ const fetchData = async () => {
       throw new Error(res.status);
     }
     const data = await res.json();
-    characterContainer.innerHTML=""
+    characterContainer.innerHTML = "";
     showCharacter(data[0]);
   } catch (error) {
     console.error(error);
@@ -30,9 +30,7 @@ const getYear = () => {
   return date.getFullYear();
 };
 
-
 const showCharacter = async (character) => {
-  
   const container = document.createElement("div");
   container.classList.add("character-box");
   container.classList.add("blur");
@@ -149,13 +147,13 @@ const showCharacter = async (character) => {
       favourites.innerHTML = `Ta bort från favoriter`;
       favourites.addEventListener("click", async () => {
         await removeFromFavourties(character);
-        await fetchData()
+        await fetchData();
       });
     } else {
       favourites.innerHTML = `Lägg till i favoriter`;
       favourites.addEventListener("click", async () => {
         await addToFavourties(character);
-        await fetchData()
+        await fetchData();
       });
     }
 

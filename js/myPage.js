@@ -24,12 +24,12 @@ const fetchUser = async () => {
   }
 };
 fetchUser();
-const confirmDelete = (user)=>{
-  const div= document.createElement("div");
+const confirmDelete = (user) => {
+  const div = document.createElement("div");
   div.classList.add("delete-container");
   div.classList.add("centered-element");
-  const text= document.createElement("h2");
-  text.innerHTML=`Är du säker du vill radera ditt konto`;
+  const text = document.createElement("h2");
+  text.innerHTML = `Är du säker du vill radera ditt konto`;
   div.appendChild(text);
 
   const passwordContainer = document.createElement("div");
@@ -50,55 +50,54 @@ const confirmDelete = (user)=>{
   see.addEventListener("click", () => {
     seePassword(password, see);
   });
-  const errorMsg= document.createElement("p");
-  errorMsg.style.color="red"
-  
-  inputContainer.appendChild(password)
-  inputContainer.appendChild(see)
-  passwordContainer.appendChild(inputContainer)
-  passwordContainer.appendChild(errorMsg)
-  div.appendChild(passwordContainer)
-  const btnContainer=document.createElement("div");
+  const errorMsg = document.createElement("p");
+  errorMsg.style.color = "red";
+
+  inputContainer.appendChild(password);
+  inputContainer.appendChild(see);
+  passwordContainer.appendChild(inputContainer);
+  passwordContainer.appendChild(errorMsg);
+  div.appendChild(passwordContainer);
+  const btnContainer = document.createElement("div");
   btnContainer.classList.add("btn-container");
-  const deleteBtn= document.createElement("button");
-  
+  const deleteBtn = document.createElement("button");
+
   deleteBtn.classList.add("delete-btn");
   deleteBtn.classList.add("bigger-btn");
   deleteBtn.classList.add("green");
-  deleteBtn.innerHTML=`Ja`;
+  deleteBtn.innerHTML = `Ja`;
   btnContainer.appendChild(deleteBtn);
-  deleteBtn.addEventListener("click", async()=>{
-    if(password.value !== user.password){
-      errorMsg.innerHTML="Inputfältet matchar inte med ditt tidigare lösen"
+  deleteBtn.addEventListener("click", async () => {
+    if (password.value !== user.password) {
+      errorMsg.innerHTML = "Inputfältet matchar inte med ditt tidigare lösen";
       return setTimeout(() => {
-        errorMsg.innerHTML=""
+        errorMsg.innerHTML = "";
       }, 3000);
     }
-    await deleteUser(user._uuid)
-    div.innerHTML="";
-    const headline=document.createElement("h2");
-    headline.innerHTML="Kontot blev borttaget";
+    await deleteUser(user._uuid);
+    div.innerHTML = "";
+    const headline = document.createElement("h2");
+    headline.innerHTML = "Kontot blev borttaget";
     div.appendChild(headline);
     setTimeout(() => {
-    sessionStorage.removeItem("loggedInUser");
-    window.location="./index.html"
+      sessionStorage.removeItem("loggedInUser");
+      window.location = "./index.html";
     }, 2000);
-  })
+  });
 
-  const closeBtn= document.createElement("button");
+  const closeBtn = document.createElement("button");
   closeBtn.classList.add("bigger-btn");
   closeBtn.classList.add("delete-btn");
-  closeBtn.innerHTML=`Nej`;
-  closeBtn.addEventListener("click", ()=>{
-  div.remove()
-})
-  btnContainer.appendChild(closeBtn)
+  closeBtn.innerHTML = `Nej`;
+  closeBtn.addEventListener("click", () => {
+    div.remove();
+  });
+  btnContainer.appendChild(closeBtn);
 
-
-  div.appendChild(passwordContainer)
-  div.appendChild(btnContainer)
-  myPageContainer.appendChild(div)
-}
+  div.appendChild(passwordContainer);
+  div.appendChild(btnContainer);
+  myPageContainer.appendChild(div);
+};
 const showUser = (user) => {
   const firstRow = document.createElement("div");
   firstRow.classList.add("first-row");
@@ -209,9 +208,9 @@ const showUser = (user) => {
   deleteAccount.classList.add("house-btn");
   deleteAccount.classList.add("Gryffindor");
   deleteAccount.innerHTML = `Radera konto`;
-  deleteAccount.addEventListener("click", ()=>{
-    confirmDelete(user)
-  })
+  deleteAccount.addEventListener("click", () => {
+    confirmDelete(user);
+  });
   userActions.appendChild(deleteAccount);
 
   myPageContainer.appendChild(firstRow);
@@ -314,10 +313,9 @@ const editState = (user, object, parent) => {
   input.type = "text";
   input.classList.add("inputs");
   input.placeholder = user[object];
-  
-  const wrongText= document.createElement("p");
-  wrongText.style.color="red";
-  
+
+  const wrongText = document.createElement("p");
+  wrongText.style.color = "red";
 
   const submitButton = document.createElement("button");
   submitButton.innerHTML = "Uppdatera";
@@ -327,14 +325,14 @@ const editState = (user, object, parent) => {
   submitButton.classList.add("link");
   submitButton.addEventListener("click", async () => {
     if (!input.value) {
-      return wrongText.innerHTML="Du måste skriva något";
+      return (wrongText.innerHTML = "Du måste skriva något");
     }
     if (input.value === user[object]) {
-      return wrongText.innerHTML="Du måste uppdatera till ett annat verdi";
+      return (wrongText.innerHTML = "Du måste uppdatera till ett annat verdi");
     }
     if (object === "username") {
       if (await verifyUsername(input.value.toLowerCase())) {
-        return wrongText.innerHTML="Detta användernamnet är upptaget";
+        return (wrongText.innerHTML = "Detta användernamnet är upptaget");
       }
     }
     user[object] = input.value;
@@ -352,7 +350,7 @@ const editState = (user, object, parent) => {
   });
 
   editProfileContainer.appendChild(input);
-  editProfileContainer.appendChild(wrongText)
+  editProfileContainer.appendChild(wrongText);
   editProfileContainer.appendChild(submitButton);
   editProfileContainer.appendChild(removeButton);
 
@@ -391,7 +389,7 @@ const editPasswordState = (user, object, parent) => {
   editProfileContainer.appendChild(oldContainer);
 
   const newContainer = document.createElement("div");
-  newContainer.style.marginTop="10px"
+  newContainer.style.marginTop = "10px";
   newContainer.classList.add("input-box");
   const newText = document.createElement("label");
   newText.innerHTML = `Nytt lösenord`;
@@ -436,10 +434,9 @@ const editPasswordState = (user, object, parent) => {
   reInputContainer.appendChild(seeRePassword);
   reContainer.appendChild(reInputContainer);
   editProfileContainer.appendChild(reContainer);
-  const wrongText= document.createElement("p");
-  wrongText.style.color="red";
-  editProfileContainer.appendChild(wrongText)
-  
+  const wrongText = document.createElement("p");
+  wrongText.style.color = "red";
+  editProfileContainer.appendChild(wrongText);
 
   const submitButton = document.createElement("button");
   submitButton.innerHTML = "Uppdatera";
@@ -448,14 +445,14 @@ const editPasswordState = (user, object, parent) => {
   submitButton.style.width = "300px";
   submitButton.classList.add("link");
   submitButton.addEventListener("click", async () => {
-    if(oldPassword.value !== user.password){
-        return wrongText.innerHTML="Detta lösenord matchar inte ditt gamla lösenord"
+    if (oldPassword.value !== user.password) {
+      return (wrongText.innerHTML = "Detta lösenord matchar inte ditt gamla lösenord");
     }
-    if(newPassword.value !== rePassword.value){
-        return wrongText.innerHTML= "Ditt nya lösenord matchar inte"
+    if (newPassword.value !== rePassword.value) {
+      return (wrongText.innerHTML = "Ditt nya lösenord matchar inte");
     }
-    if(newPassword.value === user.password){
-        return wrongText.innerHTML="Du måste uppdatera lösenordet till ett nytt"
+    if (newPassword.value === user.password) {
+      return (wrongText.innerHTML = "Du måste uppdatera lösenordet till ett nytt");
     }
     user[object] = newPassword.value;
     await updateUser(user);

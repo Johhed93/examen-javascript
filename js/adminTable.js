@@ -1,4 +1,10 @@
-import { getHeaders, database_url, checkIfLoggedIn, getLoggedInUser, deleteUser} from "./global.js";
+import {
+  getHeaders,
+  database_url,
+  checkIfLoggedIn,
+  getLoggedInUser,
+  deleteUser,
+} from "./global.js";
 checkIfLoggedIn();
 
 const userContainer = document.querySelector("#userContainer");
@@ -21,41 +27,40 @@ const fetchData = async () => {
   });
 };
 fetchData();
-const confirmDelete=(user)=>{
-const div= document.createElement("div");
-div.classList.add("delete-container");
-div.classList.add("centered-element");
-const text= document.createElement("p");
-text.classList.add("large-text");
-text.innerHTML=`Är du säker du vill radera ${user.username}`;
-div.appendChild(text);
+const confirmDelete = (user) => {
+  const div = document.createElement("div");
+  div.classList.add("delete-container");
+  div.classList.add("centered-element");
+  const text = document.createElement("p");
+  text.classList.add("large-text");
+  text.innerHTML = `Är du säker du vill radera ${user.username}`;
+  div.appendChild(text);
 
-const btnContainer=document.createElement("div");
-btnContainer.classList.add("btn-container");
-const deleteBtn= document.createElement("button");
-deleteBtn.classList.add("green");
-deleteBtn.classList.add("delete-btn");
-deleteBtn.classList.add("bigger-btn");
-deleteBtn.innerHTML=`Ja`;
-deleteBtn.addEventListener("click", async()=>{
-  await deleteUser(user._uuid)
-  await fetchData()
-})
+  const btnContainer = document.createElement("div");
+  btnContainer.classList.add("btn-container");
+  const deleteBtn = document.createElement("button");
+  deleteBtn.classList.add("delete-btn");
+  deleteBtn.classList.add("bigger-btn");
+  deleteBtn.classList.add("green");
+  deleteBtn.innerHTML = `Ja`;
+  deleteBtn.addEventListener("click", async () => {
+    await deleteUser(user._uuid);
+    await fetchData();
+  });
 
-btnContainer.appendChild(deleteBtn);
+  btnContainer.appendChild(deleteBtn);
 
-const closeBtn= document.createElement("button");
-closeBtn.classList.add("bigger-btn");
-closeBtn.classList.add("delete-btn");
-closeBtn.innerHTML=`Nej`;
-closeBtn.addEventListener("click", ()=>{
-  div.remove()
-})
-btnContainer.appendChild(closeBtn);
-div.appendChild(btnContainer);
-myPageContainer.appendChild(div)
-
-}
+  const closeBtn = document.createElement("button");
+  closeBtn.classList.add("bigger-btn");
+  closeBtn.classList.add("delete-btn");
+  closeBtn.innerHTML = `Nej`;
+  closeBtn.addEventListener("click", () => {
+    div.remove();
+  });
+  btnContainer.appendChild(closeBtn);
+  div.appendChild(btnContainer);
+  myPageContainer.appendChild(div);
+};
 const registredToday = (data) => {
   const today = new Date();
   const allNewMembers = data.filter((newMembers) => {
@@ -70,14 +75,13 @@ const registredToday = (data) => {
 };
 const monthlyRegistred = (data) => {
   const today = new Date();
-  const allNewMembers= data.filter((newMembers) => {
+  const allNewMembers = data.filter((newMembers) => {
     const timestamp = new Date(newMembers.registerDate);
     return (
       timestamp.getFullYear() === today.getFullYear() && timestamp.getMonth() === today.getMonth()
     );
   });
-  return allNewMembers
- 
+  return allNewMembers;
 };
 
 const showData = (data) => {
@@ -184,9 +188,9 @@ const showUsers = (user) => {
   const remove = document.createElement("button");
   remove.classList.add("delete-btn");
   remove.innerHTML = `Ta bort`;
-  remove.addEventListener("click", ()=>{
-    confirmDelete(user)
-  })
+  remove.addEventListener("click", () => {
+    confirmDelete(user);
+  });
   buttonContainer.appendChild(remove);
   container.appendChild(buttonContainer);
   userContainer.appendChild(li);
