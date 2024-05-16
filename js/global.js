@@ -88,10 +88,10 @@ const deleteUser = async (userid) => {
 };
 //Login funktioner
 const setLoggedInUser = (id) => {
-  return sessionStorage.setItem("loggedInUser", JSON.stringify(id));
+  return localStorage.setItem("loggedInUser", JSON.stringify(id));
 };
 const getLoggedInUser = () => {
-  return JSON.parse(sessionStorage.getItem("loggedInUser"));
+  return JSON.parse(localStorage.getItem("loggedInUser"));
 };
 const checkIfLoggedIn = () => {
   if (getLoggedInUser() === null) {
@@ -146,7 +146,7 @@ const userIsLoggedIn = async () => {
   logOut.innerHTML = "Logga ut";
   logOut.classList.add("navigation-link");
   logOut.addEventListener("click", () => {
-    sessionStorage.removeItem("loggedInUser");
+    localStorage.removeItem("loggedInUser");
     window.location.href = "./index.html";
   });
   list2.appendChild(logOut);

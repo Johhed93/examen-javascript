@@ -78,9 +78,10 @@ const confirmDelete = (user) => {
     div.innerHTML = "";
     const headline = document.createElement("h2");
     headline.innerHTML = "Kontot blev borttaget";
+    
     div.appendChild(headline);
     setTimeout(() => {
-      sessionStorage.removeItem("loggedInUser");
+      localStorage.removeItem("loggedInUser");
       window.location = "./index.html";
     }, 2000);
   });
@@ -203,7 +204,7 @@ const showUser = (user) => {
   signOut.innerHTML = "Logga ut";
   signOut.classList.add("unknown");
   signOut.addEventListener("click", () => {
-    sessionStorage.removeItem("loggedInUser");
+    localStorage.removeItem("loggedInUser");
     window.location = "./index.html";
   });
   userActions.appendChild(signOut);
